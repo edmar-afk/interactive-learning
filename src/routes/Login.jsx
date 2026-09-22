@@ -1,119 +1,216 @@
-import React, { useMemo } from "react";
-import logo from "../assets/images/logo.png";
-function Login() {
-  const colors = [
-    "#0a401c",
-    "#125c29",
-    "#1b7a38",
-    "#259946",
-    "#36bd5b",
-    "#57d679",
-    "#7ceb9b",
-    "#a6f5bd",
-    "#cbfadd",
-    "#edfdf1",
-  ];
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-  const blocks = useMemo(
-    () =>
-      Array.from({ length: 250 }, (_, i) => ({
-        id: i,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      })),
-    [],
-  );
+export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <>
-      <style>{`
-        .mask-gradient {
-          -webkit-mask-image: radial-gradient(
-            circle at 0% 30%,
-            rgba(0,0,0,1) 15%,
-            rgba(0,0,0,0.6) 45%,
-            rgba(0,0,0,0) 75%
-          );
-          mask-image: radial-gradient(
-            circle at 0% 30%,
-            rgba(0,0,0,1) 15%,
-            rgba(0,0,0,0.6) 45%,
-            rgba(0,0,0,0) 75%
-          );
-        }
-      `}</style>
+    <div className="min-h-screen bg-[#EAF7EE] flex justify-center items-center p-0 sm:p-6">
+      {/* Mobile App Container */}
+      <div className="w-full max-w-[430px] min-h-screen sm:min-h-[850px] bg-white sm:shadow-2xl overflow-hidden relative flex flex-col">
+        {/* Decorative Background */}
+        <div className="absolute top-0 left-0 right-0 h-[350px] bg-gradient-to-br from-[#2E9B59] via-[#3DBB6D] to-[#7BD89A] rounded-b-[20px]" />
 
-      <div className="relative min-h-screen bg-white text-gray-900 overflow-x-hidden antialiased">
-        <div className="absolute top-0 left-0 w-full lg:w-[45%] h-full z-0 pointer-events-none mask-gradient overflow-hidden">
-          <div className="absolute top-0 left-0 w-full grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-10">
-            {blocks.map((block) => (
-              <div
-                key={block.id}
-                className="aspect-square w-full"
-                style={{
-                  backgroundColor: block.color,
-                  backgroundImage:
-                    "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.05) 100%)",
-                }}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Decorative circles */}
+        <div className="absolute top-[-50px] right-[-45px] w-[150px] h-[150px] bg-white/10 rounded-full" />
+        <div className="absolute top-[120px] left-[-70px] w-[150px] h-[150px] bg-white/10 rounded-full" />
 
-        <div className="relative z-10 flex flex-col lg:flex-row min-h-screen w-full">
-          <div className="w-full lg:w-1/2 flex flex-col justify-between p-10 sm:p-14 lg:p-20 min-h-[15vh] lg:min-h-screen"></div>
-
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 relative bg-white/70 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none">
-            <div className="w-full max-w-[360px]">
-              <div className="flex justify-center mb-2">
-                <img src={logo} className='w-20 h-20 rounded-full' alt="" />
+        {/* Content */}
+        <div className="relative z-10 flex flex-col min-h-screen sm:min-h-[850px]">
+          {/* Header */}
+          <div className="px-7 pt-12 text-white">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                <span className="text-2xl">🌱</span>
               </div>
 
-              <div className="text-center mb-8">
-                <h2 className="text-[1.4rem] font-medium text-black mb-1.5">
-                  Welcome!
-                </h2>
-
-                <p className="text-gray-600 text-[13px] font-medium tracking-wide">
-                  Login to Your Account first
+              <div>
+                <h1 className="text-xl font-extrabold tracking-tight">
+                  Scan-Grow
+                </h1>
+                <p className="text-xs text-white/80 font-medium">
+                  Learn • Plant • Grow
                 </p>
               </div>
+            </div>
 
-              <form className="space-y-4">
+            {/* Welcome */}
+            <div className="mt-12">
+              <p className="text-sm font-semibold text-white/80">
+                Welcome back, learner! 👋
+              </p>
+
+              <h2 className="text-[32px] leading-[1.1] font-extrabold mt-2">
+                Let's grow
+                <br />
+                something amazing.
+              </h2>
+
+              <p className="mt-3 text-sm text-white/80 leading-relaxed max-w-[300px]">
+                Learn how to plant and care for fruit-bearing trees through fun
+                and interactive activities.
+              </p>
+            </div>
+          </div>
+
+          {/* Login Card */}
+          <div className="mt-10 bg-white rounded-t-[38px] flex-1 px-7 pt-8 pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
+            <div className="mb-7">
+              <h3 className="text-2xl font-extrabold text-[#183B28]">
+                Sign in
+              </h3>
+
+              <p className="text-sm text-gray-500 mt-1">
+                Enter your account to continue learning.
+              </p>
+            </div>
+
+            {/* Username */}
+            <div className="mb-5">
+              <label className="block text-sm font-bold text-[#294936] mb-2">
+                Username
+              </label>
+
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 21a8 8 0 0 0-16 0" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </span>
+
                 <input
-                  type="email"
-                  placeholder="eg. jay123@gmail.com"
-                  className="w-full bg-[#f6f7f9] border border-gray-200/80 rounded-full px-6 py-3.5 text-[14px] text-gray-800 outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-600 transition-all placeholder-gray-400 font-medium shadow-sm"
+                  type="text"
+                  placeholder="Enter your username"
+                  className="w-full h-14 rounded-2xl bg-[#F4F8F5] border border-transparent pl-12 pr-4 text-sm outline-none transition focus:bg-white focus:border-[#45B96D] focus:ring-4 focus:ring-[#45B96D]/10"
                 />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div className="mb-4">
+              <label className="block text-sm font-bold text-[#294936] mb-2">
+                Password
+              </label>
+
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="3" y="11" width="18" height="10" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </span>
 
                 <input
-                  type="password"
-                  placeholder="password"
-                  className="w-full bg-[#f6f7f9] border border-gray-200/80 rounded-full px-6 py-3.5 text-[14px] text-gray-800 outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-600 transition-all placeholder-gray-400 font-medium shadow-sm"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className="w-full h-14 rounded-2xl bg-[#F4F8F5] border border-transparent pl-12 pr-12 text-sm outline-none transition focus:bg-white focus:border-[#45B96D] focus:ring-4 focus:ring-[#45B96D]/10"
                 />
 
                 <button
-                  type="submit"
-                  className="w-full bg-[#04884f] hover:bg-[#037242] text-white rounded-full px-6 py-3.5 font-medium text-[15px] transition-all shadow-[0_8px_20px_rgba(4,136,79,0.25)]"
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#2E9B59]"
                 >
-                  Sign In
+                  {showPassword ? (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 3l18 18" />
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+                      <path d="M9.9 4.2A10.8 10.8 0 0 1 12 4c7 0 10 8 10 8a18.2 18.2 0 0 1-3.1 4.4" />
+                      <path d="M6.6 6.6C3.8 8.3 2 12 2 12s3 8 10 8a10.8 10.8 0 0 0 3.3-.5" />
+                    </svg>
+                  )}
                 </button>
-              </form>
+              </div>
+            </div>
 
-              <p className="mt-6 text-center text-[13px] text-gray-500 font-medium">
-                Don't have an account{" "}
-                <a
-                  href="#"
-                  className="text-black font-semibold underline underline-offset-2 decoration-2 hover:text-[#008751] transition-colors"
-                >
-                  sign up
-                </a>
+            {/* Remember + Forgot */}
+            <div className="flex items-center justify-between mb-7">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4 accent-[#2E9B59]" />
+
+                <span className="text-xs font-medium text-gray-500">
+                  Remember me
+                </span>
+              </label>
+
+              <button className="text-xs font-bold text-[#2E9B59]">
+                Forgot password?
+              </button>
+            </div>
+
+            {/* Login Button */}
+            <button className="w-full h-14 rounded-2xl bg-[#2E9B59] text-white font-bold text-base shadow-lg shadow-[#2E9B59]/20 transition-all hover:bg-[#25824A] active:scale-[0.98]">
+              Sign In
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center gap-4 my-7">
+              <div className="h-px bg-gray-200 flex-1" />
+
+              <span className="text-xs text-gray-400 font-medium">or</span>
+
+              <div className="h-px bg-gray-200 flex-1" />
+            </div>
+
+            {/* QR Code */}
+            <Link to={'/register'} className="w-full h-14 rounded-2xl border-2 border-[#DDEBE1] text-[#285238] font-bold text-sm flex items-center justify-center gap-3 hover:bg-[#F4FAF6] transition">
+              Create New Account
+            </Link>
+
+            {/* Footer */}
+            <div className="mt-8 text-center">
+              <p className="text-[10px] text-gray-400">Project Scan-Grow</p>
+
+              <p className="text-[10px] text-gray-300 mt-1">
+                Learn today. Plant tomorrow. Grow together. 🌿
               </p>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
-
-export default Login;
