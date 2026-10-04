@@ -7,11 +7,12 @@ import Quiz from "./routes/Quiz";
 import MultipleChoice from "./routes/MultipleChoice";
 import FillInTheBlanks from "./routes/FillInTheBlanks";
 import TrueOrFalse from "./routes/TrueOrFalse";
-import WhatArePlants from "./routes/WhatArePlants";
-import PartsOfPlants from "./routes/PartsOfPlants";
-import WhatPlantsNeedToGrow from "./routes/WhatPlantsNeedToGrow";
-import UnderstandingTheSoil from "./routes/UnderstandingTheSoil";
 import Welcome from "./routes/Welcome";
+import SoilPreparation from "./routes/SoilPreparation";
+import HandlingOfSeedlings from "./routes/HandlingOfSeedlings";
+import SeedlingDepth from "./routes/SeedingDepth";
+import SpacingOfPlants from "./routes/SpacingOfPlants";
+import WateringTechnique from "./routes/WateringTechnique";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -34,10 +35,11 @@ function App() {
         <Route path="/true-or-false" element={<TrueOrFalse/>} />
 
 
-        <Route path="/what-are-plants" element={<WhatArePlants/>} />
-        <Route path="/parts-of-plant" element={<PartsOfPlants/>} />
-        <Route path="/what-plants-need-to-grow" element={<WhatPlantsNeedToGrow/>} />
-        <Route path="/understanding-the-soil" element={<UnderstandingTheSoil/>} />
+       <Route path="/soil-preparation" element={<SoilPreparation/>} />
+       <Route path="/handling-of-seedlings" element={<HandlingOfSeedlings/>} />
+       <Route path="/seeding-depth" element={<SeedlingDepth/>} />
+       <Route path="/spacing-of-plants" element={<SpacingOfPlants/>} />
+       <Route path="/watering-technique" element={<WateringTechnique/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,248 +2,328 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Sprout,
-  BookOpen,
-  Sun,
   Droplets,
-  Leaf,
-  TreePine,
-  Apple,
-  Flower2,
   ChevronRight,
+  Shovel,
+  Hand,
+  Ruler,
+  MoveHorizontal,
   CheckCircle2,
+  GraduationCap,
 } from "lucide-react";
 import BottomNav from "../components/BottomNav";
 
-const lessons = [
+const plantingSkills = [
   {
-    id: 1,
-    title: "What Are Plants?",
+    number: "01",
+    title: "Soil Preparation",
     description:
-      "Learn what plants are, why they are important, and how they help people, animals, and the environment.",
-    icon: Sprout,
+      "Learn how to prepare loose, clean, and fertile soil before planting.",
+    route: "/soil-preparation",
+    icon: Shovel,
+    color: "brown",
+    duration: "8 min",
+    topics: [
+      "Loosen the soil",
+      "Remove weeds",
+      "Remove stones",
+      "Level the area",
+    ],
+  },
+  {
+    number: "02",
+    title: "Handling of Seedlings",
+    description:
+      "Learn how to carefully handle seedlings without damaging their stems or roots.",
+    route: "/handling-of-seedlings",
+    icon: Hand,
     color: "green",
-    category: "Plant Basics",
-    duration: "10 min",
-    topics: ["Parts of a plant", "Why plants are important", "How plants grow"],
-    link: "/what-are-plants",
+    duration: "8 min",
+    topics: [
+      "Hold gently",
+      "Protect the stem",
+      "Protect the roots",
+      "Carry carefully",
+    ],
   },
   {
-    id: 2,
-    title: "Parts of a Plant",
+    number: "03",
+    title: "Seedling Depth",
     description:
-      "Discover the different parts of a plant and understand what each part does.",
-    icon: Leaf,
-    color: "brown",
-    category: "Plant Basics",
-    duration: "12 min",
-    topics: ["Roots", "Stem", "Leaves", "Flowers", "Fruits and seeds"],
-    link: "/parts-of-plant",
-  },
-  {
-    id: 3,
-    title: "What Plants Need to Grow",
-    description:
-      "Learn about sunlight, water, air, nutrients, and healthy soil that plants need to grow strong.",
-    icon: Sun,
+      "Learn how deep to plant a seedling so it stays stable and develops healthy roots.",
+    route: "/seeding-depth",
+    icon: Ruler,
     color: "blue",
-    category: "Plant Growth",
-    duration: "10 min",
-    topics: ["Sunlight", "Water", "Air", "Nutrients"],
-    link: "/what-plants-need-to-grow",
+    duration: "8 min",
+    topics: [
+      "Prepare the hole",
+      "Place upright",
+      "Cover the roots",
+      "Provide stability",
+    ],
   },
   {
-    id: 4,
-    title: "Understanding Soil",
+    number: "04",
+    title: "Spacing of Plants",
     description:
-      "Learn why soil is important and how to choose good soil for planting.",
-    icon: TreePine,
-    color: "brown",
-    category: "Planting",
-    duration: "15 min",
-    topics: ["Types of soil", "Healthy soil", "Soil preparation"],
-    link: "/understanding-the-soil",
+      "Learn why plants need enough space for sunlight, water, nutrients, and air.",
+    route: "/spacing-of-plants",
+    icon: MoveHorizontal,
+    color: "green",
+    duration: "8 min",
+    topics: [
+      "Measure distance",
+      "Keep plants uniform",
+      "Allow sunlight",
+      "Avoid competition",
+    ],
+  },
+  {
+    number: "05",
+    title: "Watering Technique",
+    description:
+      "Learn how to water newly planted seedlings gently and evenly.",
+    route: "/watering-technique",
+    icon: Droplets,
+    color: "blue",
+    duration: "8 min",
+    topics: [
+      "Give enough water",
+      "Water gently",
+      "Water the base",
+      "Avoid overwatering",
+    ],
   },
 ];
 
 const colorStyles = {
   green: {
-    card: "border-[#CDE8D4] bg-[#F4FBF5]",
-    icon: "bg-[#DDF3E2] text-[#2E9B59]",
-    badge: "bg-[#E3F5E8] text-[#2E9B59]",
-    button: "bg-[#2E9B59] hover:bg-[#25844B]",
-    accent: "bg-[#7BD89A]",
+    iconBg: "bg-[#EAF7EE]",
+    iconColor: "text-[#2E9B59]",
+    badge: "bg-[#EAF7EE] text-[#2E9B59]",
+    number: "bg-[#2E9B59]",
   },
   brown: {
-    card: "border-[#E7D5C3] bg-[#FBF7F2]",
-    icon: "bg-[#F1E3D4] text-[#9A6842]",
-    badge: "bg-[#F3E7DA] text-[#8A5A38]",
-    button: "bg-[#9A6842] hover:bg-[#815435]",
-    accent: "bg-[#C89B72]",
+    iconBg: "bg-[#F5EDE7]",
+    iconColor: "text-[#9A6842]",
+    badge: "bg-[#F5EDE7] text-[#9A6842]",
+    number: "bg-[#9A6842]",
   },
   blue: {
-    card: "border-[#CFE2F2] bg-[#F4F9FD]",
-    icon: "bg-[#DFEFFB] text-[#3484B5]",
-    badge: "bg-[#E2F0FA] text-[#3484B5]",
-    button: "bg-[#3484B5] hover:bg-[#2A6E98]",
-    accent: "bg-[#76B7DD]",
+    iconBg: "bg-[#EAF4FA]",
+    iconColor: "text-[#3484B5]",
+    badge: "bg-[#EAF4FA] text-[#3484B5]",
+    number: "bg-[#3484B5]",
   },
 };
 
-function Lessons() {
-  return (
-    <>
-      <div className="min-h-screen bg-[#EAF7EE] px-4 py-6 sm:px-6">
-        <div className="mx-auto max-w-[900px]">
-          {/* Header */}
-          <div className="mb-7">
-            <div className="mb-3 flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2E9B59] text-white shadow-sm">
-                <BookOpen size={21} strokeWidth={2.2} />
-              </div>
+function LessonCard({ lesson }) {
+  const Icon = lesson.icon;
+  const styles = colorStyles[lesson.color];
 
-              <span className="text-sm font-bold text-[#2E9B59]">
-                LEARNING CENTER
+  return (
+    <div className="bg-white rounded-[24px] border border-[#E5EDE8] shadow-sm overflow-hidden">
+      {/* Card Header */}
+      <div className="p-5">
+        <div className="flex items-start gap-4">
+          {/* Icon */}
+          <div
+            className={`w-14 h-14 rounded-2xl ${styles.iconBg} ${styles.iconColor} flex items-center justify-center shrink-0`}
+          >
+            <Icon size={27} strokeWidth={2} />
+          </div>
+
+          {/* Title */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-2 mb-1">
+              <span
+                className={`text-[11px] font-extrabold uppercase tracking-wider ${styles.iconColor}`}
+              >
+                Rubric {lesson.number}
+              </span>
+
+              <span className="text-[11px] font-semibold text-[#8A9990] whitespace-nowrap">
+                {lesson.duration}
               </span>
             </div>
 
-            <h1 className="text-3xl font-extrabold tracking-tight text-[#244C32]">
-              Planting Lessons 🌱
-            </h1>
-
-            <p className="mt-2 max-w-[680px] text-sm leading-6 text-[#66806E]">
-              Learn how plants grow, how to plant and care for them, and
-              discover different types of plants found in the Philippines.
-            </p>
+            <h3 className="text-[19px] font-extrabold text-[#26382D] leading-tight">
+              {lesson.title}
+            </h3>
           </div>
+        </div>
 
-          {/* Progress / Introduction */}
-          <div className="mb-7 overflow-hidden rounded-3xl bg-[#2E9B59] p-5 text-white shadow-sm">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-                <Sprout size={25} />
+        {/* Description */}
+        <p className="mt-4 text-[13px] leading-6 text-[#66756C]">
+          {lesson.description}
+        </p>
+
+        {/* Topics */}
+        <div className="grid grid-cols-2 gap-2 mt-4">
+          {lesson.topics.map((topic, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-2 bg-[#F8FAF8] rounded-xl px-3 py-2.5"
+            >
+              <CheckCircle2
+                size={14}
+                className={styles.iconColor}
+                strokeWidth={2.5}
+              />
+
+              <span className="text-[11px] font-semibold text-[#536159]">
+                {topic}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Start Button */}
+      <div className="px-5 pb-5">
+        <Link
+          to={lesson.route}
+          className="w-full flex items-center justify-center gap-2 bg-[#2E9B59] hover:bg-[#26864C] text-white py-3.5 rounded-2xl text-[13px] font-extrabold transition-colors"
+        >
+          Start Lesson
+          <ChevronRight size={17} strokeWidth={2.5} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function Lessons() {
+  return (
+    <div className="min-h-screen bg-[#EAF7EE]">
+      <div className="max-w-[900px] mx-auto min-h-screen pb-24">
+        {/* Header */}
+        <header className="px-5 pt-7 pb-5">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#2E9B59] flex items-center justify-center shadow-sm">
+              <Sprout size={25} className="text-white" strokeWidth={2.2} />
+            </div>
+
+            <div>
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.15em] text-[#2E9B59]">
+                Scan-Grow
+              </p>
+
+              <h1 className="text-[25px] font-extrabold text-[#26382D] leading-tight">
+                Planting Lessons
+              </h1>
+            </div>
+          </div>
+        </header>
+
+        {/* Introduction */}
+        <section className="px-5">
+          <div className="bg-white rounded-[26px] p-5 border border-[#E1ECE5] shadow-sm">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#EAF7EE] flex items-center justify-center shrink-0">
+                <GraduationCap
+                  size={21}
+                  className="text-[#2E9B59]"
+                  strokeWidth={2.2}
+                />
               </div>
 
               <div>
-                <h2 className="text-lg font-bold">
-                  Ready to become a young plant expert?
+                <h2 className="text-[17px] font-extrabold text-[#2D4034]">
+                  Learn Good Planting Practices
                 </h2>
 
-                <p className="mt-1 text-sm leading-5 text-white/85">
-                  Explore each lesson and learn something new about planting,
-                  plant care, and Philippine plants.
+                <p className="mt-1.5 text-[13px] leading-6 text-[#68766E]">
+                  Learn the important steps in planting fruit-bearing trees.
+                  Each lesson will help you practice the correct way to prepare,
+                  plant, and care for seedlings.
                 </p>
               </div>
             </div>
 
-            <div className="mt-5 flex items-center justify-between text-xs font-semibold">
-              <span>{lessons.length} lessons available</span>
-              <span>Start learning →</span>
-            </div>
+            {/* Progress */}
+            <div className="mt-5">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[11px] font-bold text-[#68766E]">
+                  Planting Skills
+                </span>
 
-            <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/20">
-              <div className="h-full w-[8%] rounded-full bg-white" />
+                <span className="text-[11px] font-extrabold text-[#2E9B59]">
+                  5 Lessons
+                </span>
+              </div>
+
+              <div className="h-2 bg-[#E7EFE9] rounded-full overflow-hidden">
+                <div className="h-full w-full bg-[#3DBB6D] rounded-full" />
+              </div>
             </div>
           </div>
+        </section>
 
-          {/* Lesson List */}
-          <div className="space-y-4">
-            {lessons.map((lesson, index) => {
-              const Icon = lesson.icon;
-              const styles = colorStyles[lesson.color];
+        {/* Section Title */}
+        <section className="px-5 pt-7 pb-4">
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-[11px] font-extrabold uppercase tracking-wider text-[#2E9B59]">
+                Practical Assessment
+              </p>
 
-              return (
-                <div
-                  key={lesson.id}
-                  className={`group relative overflow-hidden rounded-3xl border p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${styles.card}`}
-                >
-                  {/* Decorative accent */}
-                  <div
-                    className={`absolute right-0 top-0 h-1.5 w-24 rounded-bl-full ${styles.accent}`}
-                  />
-
-                  <div className="flex gap-4">
-                    {/* Number + Icon */}
-                    <div className="flex shrink-0 flex-col items-center gap-2">
-                      <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-2xl ${styles.icon}`}
-                      >
-                        <Icon size={23} strokeWidth={2} />
-                      </div>
-
-                      <span className="text-[11px] font-bold text-gray-400">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-
-                    {/* Content */}
-                    <div className="min-w-0 flex-1">
-                      <div className="mb-1 flex flex-wrap items-center gap-2">
-                        <span
-                          className={`rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${styles.badge}`}
-                        >
-                          {lesson.category}
-                        </span>
-
-                        <span className="text-[11px] font-medium text-gray-400">
-                          {lesson.duration}
-                        </span>
-                      </div>
-
-                      <h2 className="text-lg font-extrabold text-[#294735]">
-                        {lesson.title}
-                      </h2>
-
-                      <p className="mt-1 text-sm leading-5 text-[#6B7D70]">
-                        {lesson.description}
-                      </p>
-
-                      {/* Topics */}
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {lesson.topics.map((topic) => (
-                          <span
-                            key={topic}
-                            className="rounded-lg bg-white/75 px-2.5 py-1.5 text-[11px] font-medium text-[#65766A]"
-                          >
-                            {topic}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Button */}
-                      <Link
-                        to={lesson.link}
-                        className={`mt-4 inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold text-white transition ${styles.button}`}
-                      >
-                        Start Lesson
-                        <ChevronRight size={15} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Bottom message */}
-          <div className="mt-7 rounded-3xl border border-[#D5E8D9] bg-white p-5 text-center shadow-sm">
-            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#E3F5E8] text-[#2E9B59]">
-              <Sprout size={22} />
+              <h2 className="text-[21px] font-extrabold text-[#26382D] mt-1">
+                Planting Skills
+              </h2>
             </div>
 
-            <h3 className="mt-3 text-base font-extrabold text-[#294735]">
-              Learn today, grow tomorrow 🌱
-            </h3>
-
-            <p className="mx-auto mt-1 max-w-[500px] text-xs leading-5 text-[#748278]">
-              Every plant starts with a small seed. Keep learning and discover
-              how your knowledge can help plants and our environment grow.
-            </p>
+            <div className="text-right">
+              <span className="text-[11px] font-semibold text-[#78857D]">
+                5 Skills
+              </span>
+            </div>
           </div>
+        </section>
+
+        {/* Lessons */}
+        <main className="px-5 space-y-4">
+          {plantingSkills.map((lesson) => (
+            <LessonCard key={lesson.number} lesson={lesson} />
+          ))}
+        </main>
+
+        {/* Reminder */}
+        <section className="px-5 pt-6">
+          <div className="relative overflow-hidden rounded-[26px] bg-[#2E9B59] p-5">
+            {/* Decorative circles */}
+            <div className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-white/10" />
+            <div className="absolute -right-2 -bottom-12 w-32 h-32 rounded-full bg-white/10" />
+
+            <div className="relative">
+              <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center mb-3">
+                <Sprout size={22} className="text-white" strokeWidth={2.2} />
+              </div>
+
+              <h3 className="text-[18px] font-extrabold text-white">
+                Good Planting Starts With Good Practice
+              </h3>
+
+              <p className="mt-2 text-[12px] leading-5 text-white/85 max-w-[650px]">
+                Follow each step carefully. Preparing the soil, handling
+                seedlings, planting at the correct depth, giving enough space,
+                and watering properly all help plants grow healthy and strong.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom Message */}
+        <div className="px-5 pt-6 pb-3 text-center">
+          <p className="text-[12px] font-semibold text-[#78857D]">
+            Learn today, grow tomorrow 🌱
+          </p>
         </div>
       </div>
 
+      {/* Bottom Navigation */}
       <BottomNav />
-    </>
+    </div>
   );
 }
 
