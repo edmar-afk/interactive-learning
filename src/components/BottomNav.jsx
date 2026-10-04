@@ -6,28 +6,47 @@ import {
   User,
   Brain,
 } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 function BottomNav() {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <div className="sticky bottom-0 bg-white border-t border-[#E9EFEB] px-5 py-3 flex items-center justify-around">
+    <div className="sticky bottom-0 bg-white border-t border-[#E9EFEB] px-5 py-3 flex items-center justify-around z-50">
 
       {/* Home */}
-      <button className="flex flex-col items-center gap-1 text-[#2E9B59]">
-        <House size={21} strokeWidth={2.3} />
+      <Link
+        to="/dashboard"
+        className={`flex flex-col items-center gap-1 transition-colors ${
+          isActive("/dashboard")
+            ? "text-[#2E9B59]"
+            : "text-[#91A097]"
+        }`}
+      >
+        <House size={21} strokeWidth={isActive("/dashboard") ? 2.7 : 2.3} />
 
         <span className="text-[10px] font-bold">
           Home
         </span>
-      </button>
+      </Link>
 
       {/* Lessons */}
-      <button className="flex flex-col items-center gap-1 text-[#91A097]">
-        <BookOpen size={21} strokeWidth={2.3} />
+      <Link
+        to="/lessons"
+        className={`flex flex-col items-center gap-1 transition-colors ${
+          isActive("/lessons")
+            ? "text-[#2E9B59]"
+            : "text-[#91A097]"
+        }`}
+      >
+        <BookOpen size={21} strokeWidth={isActive("/lessons") ? 2.7 : 2.3} />
 
         <span className="text-[10px] font-bold">
           Lessons
         </span>
-      </button>
+      </Link>
 
       {/* Center Scan Button */}
       <button
@@ -38,26 +57,39 @@ function BottomNav() {
       </button>
 
       {/* Quizz */}
-      <button className="flex flex-col items-center gap-1 text-[#91A097]">
-        <Brain size={21} strokeWidth={2.3} />
+      <Link
+        to="/quiz"
+        className={`flex flex-col items-center gap-1 transition-colors ${
+          isActive("/quiz")
+            ? "text-[#2E9B59]"
+            : "text-[#91A097]"
+        }`}
+      >
+        <Brain size={21} strokeWidth={isActive("/quiz") ? 2.7 : 2.3} />
 
         <span className="text-[10px] font-bold">
           Quizz
         </span>
-      </button>
+      </Link>
 
       {/* Profile */}
-      <button className="flex flex-col items-center gap-1 text-[#91A097]">
-        <User size={21} strokeWidth={2.3} />
+      <Link
+        to="/profile"
+        className={`flex flex-col items-center gap-1 transition-colors ${
+          isActive("/profile")
+            ? "text-[#2E9B59]"
+            : "text-[#91A097]"
+        }`}
+      >
+        <User size={21} strokeWidth={isActive("/profile") ? 2.7 : 2.3} />
 
         <span className="text-[10px] font-bold">
           Profile
         </span>
-      </button>
+      </Link>
 
     </div>
   );
 }
 
 export default BottomNav;
-
