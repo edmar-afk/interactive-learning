@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Swal from "sweetalert2";
-import trueOrFalseQuestions from "../components/quizzes/TrueOrFalse";
+import trueOrFalse from "../components/quizzes/trueOrFalse";
 import BottomNav from "../components/BottomNav";
 
 function TrueOrFalse() {
@@ -40,7 +40,7 @@ function TrueOrFalse() {
 
   // Motivational message based on score
   const getMotivationalMessage = (score) => {
-    const total = trueOrFalseQuestions.length;
+    const total = trueOrFalse.length;
     const percentage = (score / total) * 100;
 
     if (percentage === 100) {
@@ -95,7 +95,7 @@ function TrueOrFalse() {
     if (submitted) return;
 
     // Find unanswered questions
-    const unansweredQuestions = trueOrFalseQuestions.filter(
+    const unansweredQuestions = trueOrFalse.filter(
       (question) => answers[question.id] === undefined,
     );
 
@@ -159,7 +159,7 @@ function TrueOrFalse() {
     // Calculate score
     let calculatedScore = 0;
 
-    trueOrFalseQuestions.forEach((question) => {
+    trueOrFalse.forEach((question) => {
       if (answers[question.id] === question.answer) {
         calculatedScore++;
       }
@@ -177,12 +177,12 @@ function TrueOrFalse() {
       html: `
         <div class="py-2">
           <div class="text-5xl font-bold text-[#3484B5] mb-3">
-            ${calculatedScore}/${trueOrFalseQuestions.length}
+            ${calculatedScore}/${trueOrFalse.length}
           </div>
 
           <p class="text-gray-700 font-medium mb-2">
             ${Math.round(
-              (calculatedScore / trueOrFalseQuestions.length) * 100,
+              (calculatedScore / trueOrFalse.length) * 100,
             )}%
           </p>
 
@@ -253,7 +253,7 @@ function TrueOrFalse() {
                   <p className="text-xs text-gray-500">Your Score</p>
 
                   <p className="text-2xl font-bold text-[#3484B5]">
-                    {score}/{trueOrFalseQuestions.length}
+                    {score}/{trueOrFalse.length}
                   </p>
                 </div>
               )}
@@ -264,7 +264,7 @@ function TrueOrFalse() {
         {/* Questions */}
         <main className="mx-auto max-w-[700px] px-4 py-6">
           <div className="space-y-5">
-            {trueOrFalseQuestions.map((question, index) => {
+            {trueOrFalse.map((question, index) => {
               const selectedAnswer = answers[question.id];
 
               const isCorrect = submitted && selectedAnswer === question.answer;
