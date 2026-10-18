@@ -19,7 +19,6 @@ function SoilPreparation() {
     <>
       <div className="min-h-screen bg-[#EAF7EE] px-4 py-6 sm:px-6">
         <div className="mx-auto max-w-[900px]">
-
           {/* Back Button */}
           <Link
             to="/lessons"
@@ -46,9 +45,8 @@ function SoilPreparation() {
             </h1>
 
             <p className="mt-2 max-w-[680px] text-sm leading-6 text-[#66806E]">
-              Learn how to prepare the soil properly before planting a
-              seedling. Good soil preparation gives roots a healthy place to
-              grow.
+              Learn how to prepare the soil properly before planting a seedling.
+              Good soil preparation gives roots a healthy place to grow.
             </p>
           </div>
 
@@ -91,8 +89,8 @@ function SoilPreparation() {
                 </p>
 
                 <p>
-                  Finally, level the soil so that the planting area is ready
-                  for the seedling.
+                  Finally, level the soil so that the planting area is ready for
+                  the seedling.
                 </p>
               </div>
 
@@ -140,26 +138,34 @@ function SoilPreparation() {
               </div>
             </div>
 
+            {/* YouTube Video */}
             <div className="bg-black">
-              <div className="flex aspect-video items-center justify-center text-center text-white">
-                <div>
-                  <PlayCircle size={48} className="mx-auto mb-2 opacity-60" />
-                  <p className="text-sm font-semibold opacity-70">
-                    YouTube video will be added here
-                  </p>
-                </div>
+              <div className="aspect-video w-full">
+                <iframe
+                  className="h-full w-full"
+                  src="https://www.youtube.com/embed/yszq4AnZQik"
+                  title="How to Prepare Soil Before Planting"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
               </div>
             </div>
 
+            {/* Video Source */}
             <div className="px-5">
               <div className="flex flex-row items-center justify-between rounded-xl px-4 py-3">
                 <p className="text-[9px] font-bold uppercase tracking-wider text-[#9AA79E]">
                   Video Source
                 </p>
 
-                <span className="text-xs font-bold text-[#9AA79E]">
-                  YouTube link coming soon
-                </span>
+                <a
+                  href="https://www.youtube.com/watch?v=yszq4AnZQik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold text-[#2E9B59] hover:underline"
+                >
+                  YouTube
+                </a>
               </div>
             </div>
           </section>
@@ -309,9 +315,7 @@ function SoilPreparation() {
                     className="mt-0.5 shrink-0 text-[#7BD89A]"
                   />
 
-                  <p className="text-xs leading-5 text-[#68796E]">
-                    {item}
-                  </p>
+                  <p className="text-xs leading-5 text-[#68796E]">{item}</p>
                 </div>
               ))}
             </div>

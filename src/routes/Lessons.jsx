@@ -12,7 +12,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import BottomNav from "../components/BottomNav";
-
+import video1 from "../assets/videos/video1.mp4";
 const plantingSkills = [
   {
     number: "01",
@@ -256,6 +256,45 @@ function Lessons() {
               <div className="h-2 bg-[#E7EFE9] rounded-full overflow-hidden">
                 <div className="h-full w-full bg-[#3DBB6D] rounded-full" />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Introduction Video */}
+        <section className="px-5 pt-6">
+          <div className="bg-white rounded-[26px] p-5 border border-[#E1ECE5] shadow-sm">
+            <div className="mb-4">
+              <p className="text-[11px] font-extrabold uppercase tracking-wider text-[#2E9B59]">
+                Watch and Learn
+              </p>
+
+              <h2 className="text-[20px] font-extrabold text-[#26382D] mt-1">
+                Introduction to Planting
+              </h2>
+
+              <p className="mt-1.5 text-[13px] leading-6 text-[#68766E]">
+                Watch this introductory video to learn the basics of proper
+                planting before starting your practical lessons.
+              </p>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl bg-black">
+              <video
+                className="w-full aspect-video object-contain"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                <source src={video1} type="video/mp4" />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+
+            <div className="flex items-center gap-2 mt-3 text-[#2E9B59]">
+              <CheckCircle2 size={16} />
+              <span className="text-[12px] font-semibold">
+                Watch the video before starting the lessons.
+              </span>
             </div>
           </div>
         </section>
