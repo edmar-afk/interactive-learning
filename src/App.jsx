@@ -13,6 +13,7 @@ import HandlingOfSeedlings from "./routes/HandlingOfSeedlings";
 import SeedlingDepth from "./routes/SeedingDepth";
 import SpacingOfPlants from "./routes/SpacingOfPlants";
 import WateringTechnique from "./routes/WateringTechnique";
+import Profile from "./routes/Profile";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -28,6 +29,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/lessons" element={<Lessons />} />
+        <Route path="/profile" element={<Profile/>} />
+
 
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/multiple-choice" element={<MultipleChoice />} />
