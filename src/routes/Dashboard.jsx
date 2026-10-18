@@ -95,106 +95,11 @@ function Dashboard() {
           {/* =====================================================
               QUIZ
           ====================================================== */}
-          <section className="px-5 mt-3">
+          <section className="mt-8">
             <QuizCard />
           </section>
 
-          {/* =====================================================
-              PLANTING JOURNEY
-          ====================================================== */}
-          <section className="px-5 mt-5">
-            <div
-              className="
-                relative
-                overflow-hidden
-                rounded-[24px]
-                bg-[#173D29]
-                px-5
-                py-5
-                shadow-[0_8px_25px_rgba(23,61,41,0.10)]
-              "
-            >
-              {/* Soft botanical shape */}
-              <div
-                className="
-                  absolute
-                  -right-10
-                  -top-10
-                  h-32
-                  w-32
-                  rounded-full
-                  border-[22px]
-                  border-[#3DBB6D]/15
-                "
-              />
-
-              <div
-                className="
-                  absolute
-                  right-8
-                  -bottom-10
-                  h-24
-                  w-24
-                  rounded-full
-                  bg-[#7BD89A]/10
-                "
-              />
-
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#9DDBB3]">
-                      Your journey
-                    </p>
-
-                    <h3 className="mt-1 text-[17px] font-extrabold tracking-[-0.02em] text-white">
-                      Growing knowledge
-                    </h3>
-                  </div>
-
-                  <div
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-white/10
-                      text-lg
-                    "
-                  >
-                    🌱
-                  </div>
-                </div>
-
-                {/* Progress */}
-                <div className="mt-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-medium text-[#C9DED0]">
-                      2 of 5 lessons completed
-                    </span>
-
-                    <span className="text-[11px] font-bold text-[#9DDBB3]">
-                      40%
-                    </span>
-                  </div>
-
-                  <div className="h-[6px] rounded-full bg-white/10 overflow-hidden">
-                    <div
-                      className="
-                        h-full
-                        w-[40%]
-                        rounded-full
-                        bg-[#63C982]
-                      "
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+         
 
           {/* =====================================================
               DAILY TIP

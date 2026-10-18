@@ -3,6 +3,8 @@ import React, { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import multipleChoiceQuestions from "../components/quizzes/multipleChoiceQuestions";
 import BottomNav from "../components/BottomNav";
+import { saveQuizScore } from "../utils/quizStorage";
+
 function MultipleChoice() {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -164,6 +166,17 @@ function MultipleChoice() {
 
     setScore(calculatedScore);
     setSubmitted(true);
+
+    // Save or update the existing Multiple Choice record
+    try {
+      saveQuizScore({
+        quizType: "Multiple Choice",
+        score: calculatedScore,
+        totalQuestions: multipleChoiceQuestions.length,
+      });
+    } catch (error) {
+      console.error("Failed to save quiz score:", error);
+    }
 
     const motivation = getMotivationalMessage(calculatedScore);
 
