@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
@@ -55,10 +56,7 @@ const getInitials = (firstName, lastName, username) => {
 };
 
 const getFullName = (user) => {
-  const name = [
-    user?.first_name,
-    user?.last_name,
-  ]
+  const name = [user?.first_name, user?.last_name]
     .filter(Boolean)
     .join(" ")
     .trim();
@@ -99,7 +97,6 @@ export default function Profile() {
 
   const username = user?.username || "No username";
 
-  const email = user?.email || "No email provided";
 
   // Superuser = Teacher, otherwise Student
   const role = user?.is_superuser === true ? "Teacher" : "Student";
@@ -109,14 +106,9 @@ export default function Profile() {
   const initials = getInitials(
     user?.first_name,
     user?.last_name,
-    user?.username
+    user?.username,
   );
 
-  // Optional fields if your serializer provides them
-  const yearLevel = user?.year_level || user?.yearLevel;
-  const section = user?.section || user?.section_name;
-  const gender = user?.gender;
-  const birthDate = user?.birth_date || user?.birthDate;
 
   // ============================================================
   // ANIMATION CONFIGURATION
@@ -178,14 +170,7 @@ export default function Profile() {
         icon: UserRound,
         color: "bg-blue-50 text-blue-600",
       },
-      {
-        id: "email",
-        title: "Email Address",
-        value: email,
-        description: "Your registered email",
-        icon: Mail,
-        color: "bg-purple-50 text-purple-600",
-      },
+    
       {
         id: "role",
         title: "Account Role",
@@ -211,7 +196,7 @@ export default function Profile() {
             : "bg-emerald-50 text-emerald-600",
       },
     ],
-    [username, email, role, isTeacher, user]
+    [username, role, isTeacher, user],
   );
 
   // ============================================================
@@ -267,17 +252,14 @@ export default function Profile() {
   return (
     <>
       <div className="min-h-screen bg-[#F2F8F3] pb-32 overflow-hidden">
-
         {/* ================================================== */}
         {/* HERO SECTION */}
         {/* ================================================== */}
 
         <section className="relative bg-gradient-to-br from-[#145C3A] via-[#238B50] to-[#55C879] pt-10 pb-28 px-5 overflow-hidden rounded-b-[42px]">
-
           {/* Background Decorations */}
 
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
             <motion.div
               {...floating(0, 20)}
               className="absolute top-12 right-[-20px] text-white/10"
@@ -363,7 +345,9 @@ export default function Profile() {
           {/* Profile Avatar */}
 
           <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.7, y: 35 }}
+            initial={
+              shouldReduceMotion ? false : { opacity: 0, scale: 0.7, y: 35 }
+            }
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...spring, delay: 0.2 }}
             className="relative z-10 max-w-3xl mx-auto mt-10 flex flex-col items-center text-center"
@@ -401,9 +385,7 @@ export default function Profile() {
               {fullName}
             </motion.h2>
 
-            <p className="text-green-100 text-sm mt-1">
-              @{username}
-            </p>
+            <p className="text-green-100 text-sm mt-1">@{username}</p>
 
             {/* Role Badge */}
 
@@ -420,9 +402,7 @@ export default function Profile() {
                 <GraduationCap size={18} className="text-green-100" />
               )}
 
-              <span className="font-bold text-sm">
-                {role}
-              </span>
+              <span className="font-bold text-sm">{role}</span>
 
               <Sparkles size={14} className="text-yellow-200" />
             </motion.div>
@@ -434,7 +414,6 @@ export default function Profile() {
         {/* ================================================== */}
 
         <main className="relative z-20 max-w-3xl mx-auto px-5 -mt-16">
-
           {/* Welcome Card */}
 
           <motion.section
@@ -487,10 +466,7 @@ export default function Profile() {
                 </p>
               </div>
 
-              <motion.div
-                {...floating(1, 6)}
-                className="text-green-600"
-              >
+              <motion.div {...floating(1, 6)} className="text-green-600">
                 <Leaf size={25} />
               </motion.div>
             </div>
@@ -505,13 +481,9 @@ export default function Profile() {
                     key={card.id}
                     variants={fadeUp}
                     type="button"
-                    onClick={() =>
-                      setSelectedCard(isSelected ? null : card.id)
-                    }
+                    onClick={() => setSelectedCard(isSelected ? null : card.id)}
                     whileHover={
-                      shouldReduceMotion
-                        ? {}
-                        : { y: -6, scale: 1.025 }
+                      shouldReduceMotion ? {} : { y: -6, scale: 1.025 }
                     }
                     whileTap={{ scale: 0.97 }}
                     transition={spring}
@@ -522,7 +494,9 @@ export default function Profile() {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center ${card.color}`}>
+                      <div
+                        className={`w-11 h-11 rounded-2xl flex items-center justify-center ${card.color}`}
+                      >
                         <Icon size={21} />
                       </div>
 
@@ -584,42 +558,13 @@ export default function Profile() {
             </div>
 
             <div className="bg-white rounded-[26px] border border-gray-100 shadow-sm overflow-hidden">
-
               {[
                 {
                   label: "First Name",
                   value: user?.first_name || "Not provided",
                   icon: UserRound,
                 },
-                {
-                  label: "Last Name",
-                  value: user?.last_name || "Not provided",
-                  icon: UserRound,
-                },
-                {
-                  label: "Gender",
-                  value: gender || "Not provided",
-                  icon: Fingerprint,
-                },
-                {
-                  label: "Birth Date",
-                  value: formatDate(birthDate),
-                  icon: CalendarDays,
-                },
-                ...(yearLevel
-                  ? [{
-                      label: "Year Level",
-                      value: yearLevel,
-                      icon: GraduationCap,
-                    }]
-                  : []),
-                ...(section
-                  ? [{
-                      label: "Section",
-                      value: section,
-                      icon: BookOpen,
-                    }]
-                  : []),
+               
               ].map((item, index, array) => {
                 const Icon = item.icon;
 
@@ -669,11 +614,7 @@ export default function Profile() {
             className="mt-8 relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#164E35] to-[#247E4C] p-6 text-white shadow-lg"
           >
             <div className="absolute -right-6 -top-8 opacity-10">
-              {isTeacher ? (
-                <GraduationCap size={150} />
-              ) : (
-                <Sprout size={150} />
-              )}
+              {isTeacher ? <GraduationCap size={150} /> : <Sprout size={150} />}
             </div>
 
             <div className="relative z-10">
@@ -818,7 +759,6 @@ export default function Profile() {
               SCAN-GROW • MY PROFILE
             </p>
           </motion.div>
-
         </main>
       </div>
 
