@@ -14,6 +14,11 @@ import SeedlingDepth from "./routes/SeedingDepth";
 import SpacingOfPlants from "./routes/SpacingOfPlants";
 import WateringTechnique from "./routes/WateringTechnique";
 import Profile from "./routes/Profile";
+import SeedlingDepthQuiz from "./components/quizzes/SeedlingDepthQuiz";
+import SoilPreparationQuiz from "./components/quizzes/SoilPreparationQuiz";
+import HandlingOfSeedlingsQuiz from "./components/quizzes/HandlingOfSeedlingsQuiz";
+import SpacingOfPlantsQuiz from "./components/quizzes/SpacingOfPlantsQuiz";
+import WateringTechniqueQuiz from "./components/quizzes/WateringTechniquesQuiz";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -43,6 +48,17 @@ function App() {
        <Route path="/seeding-depth" element={<SeedlingDepth/>} />
        <Route path="/spacing-of-plants" element={<SpacingOfPlants/>} />
        <Route path="/watering-technique" element={<WateringTechnique/>} />
+
+
+
+
+       {/* quizzes */}
+
+       <Route path="/seedling-depth-quiz" element={<SeedlingDepthQuiz/>} />
+       <Route path="/soil-preparation-quiz" element={<SoilPreparationQuiz/>} />
+       <Route path="/handling-of-seedlings-quiz" element={<HandlingOfSeedlingsQuiz/>} />
+       <Route path="/spacing-of-plants-quiz" element={<SpacingOfPlantsQuiz/>} />
+       <Route path="/watering-technique-quiz" element={<WateringTechniqueQuiz/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sprout,
   Leaf,
@@ -10,11 +10,143 @@ import {
   BookOpen,
   CircleCheck,
   Mountain,
+  Trophy,
+  RotateCcw,
+  Clock,
+  Loader2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import api from "../assets/api";
 import BottomNav from "../components/BottomNav";
 
+const LESSON_TITLE = "Soil Preparation";
+
 function SoilPreparation() {
+  const [userId, setUserId] = useState(null);
+  const [isSuperuser, setIsSuperuser] = useState(false);
+  const [quizScore, setQuizScore] = useState(null);
+  const [checkingQuiz, setCheckingQuiz] = useState(true);
+  const [deletingQuiz, setDeletingQuiz] = useState(false);
+
+  // Get the logged-in user from Local Storage
+  useEffect(() => {
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
+
+      setIsSuperuser(userInfo?.is_superuser === true);
+
+      if (!userInfo?.id) {
+        setUserId(null);
+        setCheckingQuiz(false);
+        return;
+      }
+
+      setUserId(userInfo.id);
+    } catch (error) {
+      console.error("Unable to read user information:", error);
+      setCheckingQuiz(false);
+    }
+  }, []);
+
+  // Check whether the current user already took this lesson's quiz
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchQuizScore = async () => {
+      setCheckingQuiz(true);
+
+      try {
+        const response = await api.get(`/api/quiz-scores/${userId}/`);
+
+        const scores = Array.isArray(response.data) ? response.data : [];
+
+        // Match the exact lesson title
+        const existingScore = scores.find(
+          (item) => item.title?.trim() === LESSON_TITLE,
+        );
+
+        setQuizScore(existingScore || null);
+      } catch (error) {
+        console.error("Unable to fetch quiz history:", error);
+
+        Swal.fire({
+          icon: "error",
+          title: "Unable to Check Quiz",
+          text:
+            error.response?.data?.error ||
+            "Could not retrieve your quiz history. Please try again.",
+          confirmButtonColor: "#2E9B59",
+        });
+      } finally {
+        setCheckingQuiz(false);
+      }
+    };
+
+    fetchQuizScore();
+  }, [userId]);
+
+  // Delete previous attempt so the student can retake the quiz
+  const handleRetryQuiz = async () => {
+    if (!userId || deletingQuiz) return;
+
+    const confirmation = await Swal.fire({
+      title: "Retry This Quiz?",
+      text: "Your previous quiz attempt for Soil Preparation will be deleted. You will need to take the quiz again.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete and Retry",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#2E9B59",
+      cancelButtonColor: "#9CA3AF",
+      reverseButtons: true,
+    });
+
+    if (!confirmation.isConfirmed) return;
+
+    setDeletingQuiz(true);
+
+    try {
+      await api.delete(`/api/quiz-scores/${userId}/`, {
+        params: {
+          title: LESSON_TITLE,
+        },
+      });
+
+      setQuizScore(null);
+
+      await Swal.fire({
+        icon: "success",
+        title: "Previous Attempt Deleted!",
+        text: "You can now take the Soil Preparation quiz again.",
+        confirmButtonColor: "#2E9B59",
+      });
+    } catch (error) {
+      console.error("Unable to delete quiz attempt:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Deletion Failed",
+        text:
+          error.response?.data?.error ||
+          "Something went wrong while deleting your quiz attempt. Please try again.",
+        confirmButtonColor: "#2E9B59",
+      });
+    } finally {
+      setDeletingQuiz(false);
+    }
+  };
+
+  // Format submission date
+  const formatDate = (date) => {
+    if (!date) return "Not available";
+
+    return new Date(date).toLocaleString("en-PH", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+  };
+
   return (
     <>
       <div className="min-h-screen bg-[#EAF7EE] px-4 py-6 sm:px-6">
@@ -138,7 +270,6 @@ function SoilPreparation() {
               </div>
             </div>
 
-            {/* YouTube Video */}
             <div className="bg-black">
               <div className="aspect-video w-full">
                 <iframe
@@ -151,7 +282,6 @@ function SoilPreparation() {
               </div>
             </div>
 
-            {/* Video Source */}
             <div className="px-5">
               <div className="flex flex-row items-center justify-between rounded-xl px-4 py-3">
                 <p className="text-[9px] font-bold uppercase tracking-wider text-[#9AA79E]">
@@ -286,7 +416,7 @@ function SoilPreparation() {
             </div>
           </section>
 
-          {/* Summary */}
+          {/* Summary and Quiz */}
           <section className="rounded-3xl border border-[#D5E8D9] bg-white p-5 shadow-sm sm:p-6">
             <div className="flex items-center gap-2">
               <CheckCircle2 size={20} className="text-[#2E9B59]" />
@@ -319,9 +449,160 @@ function SoilPreparation() {
                 </div>
               ))}
             </div>
+
+            {/* QUIZ HISTORY */}
+            <div className="mt-8 border-t border-[#E8F0EA] pt-6">
+              {checkingQuiz ? (
+                <div className="flex flex-col items-center rounded-2xl bg-[#F4FBF5] p-6 text-center">
+                  <Loader2 size={28} className="animate-spin text-[#2E9B59]" />
+
+                  <p className="mt-3 text-sm font-bold text-[#477157]">
+                    Checking your quiz history...
+                  </p>
+                </div>
+              ) : !userId ? (
+                <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
+                  <p className="text-sm font-bold text-amber-800">
+                    Please log in to take this quiz.
+                  </p>
+
+                  <Link
+                    to="/login"
+                    className="mt-3 inline-flex rounded-xl bg-[#2E9B59] px-5 py-2.5 text-xs font-extrabold text-white"
+                  >
+                    Log In
+                  </Link>
+                </div>
+              ) : quizScore ? (
+                <div className="rounded-2xl border border-green-200 bg-[#F1FAF3] p-5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-green-100 text-green-700">
+                      <Trophy size={23} />
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-green-700">
+                        Quiz Already Completed
+                      </p>
+
+                      <h3 className="text-base font-extrabold text-[#294735]">
+                        You Already Took This Quiz!
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="mt-5 grid grid-cols-2 gap-3">
+                    <div className="rounded-xl bg-white p-4">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                        Your Score
+                      </p>
+
+                      <p className="mt-1 break-words text-lg font-black text-[#2E9B59]">
+                        {quizScore.score}
+                      </p>
+                    </div>
+
+                    <div className="rounded-xl bg-white p-4">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                        Status
+                      </p>
+
+                      <p
+                        className={`mt-1 text-sm font-extrabold ${
+                          quizScore.status === "Passed"
+                            ? "text-green-600"
+                            : "text-amber-600"
+                        }`}
+                      >
+                        {quizScore.status}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex items-center gap-2 rounded-xl bg-white p-3 text-xs text-gray-500">
+                    <Clock size={15} className="shrink-0 text-[#2E9B59]" />
+
+                    <span>
+                      Submitted: {formatDate(quizScore.time_submitted)}
+                    </span>
+                  </div>
+
+                  {quizScore.comment && (
+                    <div className="mt-3 rounded-xl bg-white p-4">
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
+                        Feedback
+                      </p>
+
+                      <p className="mt-1 text-sm leading-6 text-gray-600">
+                        {quizScore.comment}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="mt-5 rounded-xl bg-green-100/70 p-3 text-center">
+                    <p className="text-xs font-semibold text-green-800">
+                      Your previous result is saved. To take this quiz again,
+                      delete your previous attempt first.
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    disabled
+                    className="mt-5 flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-2xl bg-gray-300 px-5 py-3.5 text-sm font-extrabold text-gray-600"
+                  >
+                    <CheckCircle2 size={17} />
+                    You Already Took the Quiz
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleRetryQuiz}
+                    disabled={deletingQuiz}
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#2E9B59] bg-white px-5 py-3.5 text-sm font-extrabold text-[#2E9B59] transition hover:bg-[#EAF7EE] disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {deletingQuiz ? (
+                      <>
+                        <Loader2 size={17} className="animate-spin" />
+                        Deleting Previous Attempt...
+                      </>
+                    ) : (
+                      <>
+                        <RotateCcw size={17} />
+                        Delete Previous Attempt & Retry
+                      </>
+                    )}
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <div className="mb-4 rounded-2xl bg-[#F1FAF3] p-4">
+                    <p className="text-sm font-extrabold text-[#294735]">
+                      Ready to test your knowledge? 🌱
+                    </p>
+
+                    <p className="mt-1 text-xs leading-5 text-[#718078]">
+                      Complete the lesson quiz to check how well you understand
+                      proper soil preparation.
+                    </p>
+                  </div>
+
+                  {/* Hide Take Quiz button for superusers */}
+                  {!isSuperuser && (
+                    <Link
+                      to="/soil-preparation-quiz"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#2E9B59] px-5 py-3.5 text-sm font-extrabold text-white shadow-md transition hover:-translate-y-1 hover:bg-[#247D46]"
+                    >
+                      <BookOpen size={17} />
+                      Take Lesson Quiz
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
           </section>
 
-          {/* Bottom */}
+          {/* Bottom Navigation */}
           <div className="mt-6 flex gap-3 pb-6">
             <Link
               to="/lessons"

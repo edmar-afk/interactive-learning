@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import fillInTheBlanksQuestions from "../components/quizzes/fill-in-the-blanks";
 import BottomNav from "../components/BottomNav";
-
+import api from "../assets/api";
 function FillInTheBlanks() {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -409,7 +409,7 @@ function FillInTheBlanks() {
         </main>
       </div>
 
-      <BottomNav/>
+      <BottomNav />
     </>
   );
 }

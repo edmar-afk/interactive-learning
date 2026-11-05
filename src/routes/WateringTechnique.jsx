@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sprout,
   Leaf,
@@ -11,16 +11,196 @@ import {
   PlayCircle,
   BookOpen,
   CloudRain,
+  Trophy,
+  CalendarDays,
+  Trash2,
+  ClipboardCheck,
+  Loader2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import api from "../assets/api";
 import BottomNav from "../components/BottomNav";
 
+const LESSON_TITLE = "Watering Technique";
+const QUIZ_ROUTE = "/watering-technique-quiz";
+
 function WateringTechnique() {
+  const [quizAttempt, setQuizAttempt] = useState(null);
+  const [loadingAttempt, setLoadingAttempt] = useState(true);
+  const [userId, setUserId] = useState(null);
+  const [isSuperuser, setIsSuperuser] = useState(false);
+
+  // Get the currently logged-in user and check superuser status.
+  useEffect(() => {
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
+
+      if (userInfo) {
+        setIsSuperuser(userInfo.is_superuser === true);
+      }
+
+      if (userInfo?.id) {
+        setUserId(userInfo.id);
+      } else {
+        setLoadingAttempt(false);
+      }
+    } catch (error) {
+      console.error("Error reading user information:", error);
+      setLoadingAttempt(false);
+    }
+  }, []);
+
+  // Fetch the student's quiz history.
+  const fetchQuizAttempt = async () => {
+    if (!userId) {
+      setLoadingAttempt(false);
+      return;
+    }
+
+    try {
+      setLoadingAttempt(true);
+
+      const response = await api.get(`/api/quiz-scores/${userId}/`);
+
+      const scores = Array.isArray(response.data)
+        ? response.data
+        : response.data?.results || [];
+
+      const existingAttempt = scores.find(
+        (item) => item.title?.trim() === LESSON_TITLE,
+      );
+
+      setQuizAttempt(existingAttempt || null);
+    } catch (error) {
+      console.error("Error fetching quiz history:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Unable to Load Quiz History",
+        text: "Please check your connection and try again.",
+        confirmButtonColor: "#2E9B59",
+      });
+    } finally {
+      setLoadingAttempt(false);
+    }
+  };
+
+  useEffect(() => {
+    if (userId) {
+      fetchQuizAttempt();
+    }
+  }, [userId]);
+
+  // Delete the previous quiz attempt.
+  const handleDeleteAttempt = async () => {
+    if (!userId || !quizAttempt) return;
+
+    const result = await Swal.fire({
+      title: "Delete Previous Attempt?",
+      text: "Your saved Watering Technique quiz result will be deleted. You can take the quiz again afterward.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete It",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#DC2626",
+      cancelButtonColor: "#64748B",
+      reverseButtons: true,
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await api.delete(`/api/quiz-scores/${userId}/`, {
+        params: {
+          title: LESSON_TITLE,
+        },
+      });
+
+      setQuizAttempt(null);
+
+      await Swal.fire({
+        icon: "success",
+        title: "Previous Attempt Deleted",
+        text: "You can now take the Watering Technique quiz again.",
+        confirmButtonColor: "#2E9B59",
+      });
+    } catch (error) {
+      console.error("Error deleting quiz attempt:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Deletion Failed",
+        text:
+          error.response?.data?.detail ||
+          "Something went wrong while deleting your previous attempt.",
+        confirmButtonColor: "#2E9B59",
+      });
+    }
+  };
+
+  // Format the quiz submission date.
+  const formatDate = (date) => {
+    if (!date) return "Date unavailable";
+
+    const parsedDate = new Date(date);
+
+    if (Number.isNaN(parsedDate.getTime())) {
+      return "Date unavailable";
+    }
+
+    return parsedDate.toLocaleString("en-PH", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+  };
+
+  const skills = [
+    {
+      title: "Give Enough Water",
+      text: "Add enough water to moisten the soil around the seedling.",
+      icon: Droplets,
+      bg: "bg-[#F1E3D4]",
+      color: "text-[#9A6842]",
+      border: "border-[#E7D5C3]",
+    },
+    {
+      title: "Water Gently",
+      text: "Use a gentle flow of water so the soil and seedling are not disturbed.",
+      icon: Waves,
+      bg: "bg-[#E3F5E8]",
+      color: "text-[#2E9B59]",
+      border: "border-[#D5E8D9]",
+    },
+    {
+      title: "Water the Base",
+      text: "Direct the water around the base instead of hitting the leaves or stem.",
+      icon: Sprout,
+      bg: "bg-[#FFF9E8]",
+      color: "text-[#E4A72C]",
+      border: "border-[#FFF0C7]",
+    },
+    {
+      title: "Avoid Too Much or Too Little",
+      text: "Maintain a proper amount of moisture without overwatering or underwatering.",
+      icon: ShieldCheck,
+      bg: "bg-[#F4EAF5]",
+      color: "text-[#9B5FA6]",
+      border: "border-[#E8D7E8]",
+    },
+  ];
+
+  const summaryItems = [
+    "Newly planted seedlings need enough water.",
+    "Water should be applied gently and evenly.",
+    "Water around the base instead of directly hitting the leaves or stem.",
+    "Avoid giving the seedling too much or too little water.",
+  ];
+
   return (
     <>
       <div className="min-h-screen bg-[#EAF7EE] px-4 py-6 sm:px-6">
         <div className="mx-auto max-w-[900px]">
-
           <Link
             to="/lessons"
             className="mb-5 inline-flex items-center gap-2 rounded-xl bg-white px-3.5 py-2 text-xs font-bold text-[#477157] shadow-sm transition hover:bg-[#F4FBF5]"
@@ -29,6 +209,7 @@ function WateringTechnique() {
             Back to Lessons
           </Link>
 
+          {/* Lesson Header */}
           <div className="mb-7">
             <div className="mb-3 flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2E9B59] text-white shadow-sm">
@@ -79,17 +260,13 @@ function WateringTechnique() {
 
                 <p>
                   Give enough water to{" "}
-                  <strong className="text-[#2E9B59]">
-                    moisten the soil
-                  </strong>
-                  , but avoid giving too much or too little.
+                  <strong className="text-[#2E9B59]">moisten the soil</strong>,
+                  but avoid giving too much or too little.
                 </p>
 
                 <p>
                   Water gently around the{" "}
-                  <strong className="text-[#2E9B59]">
-                    base of the plant
-                  </strong>{" "}
+                  <strong className="text-[#2E9B59]">base of the plant</strong>{" "}
                   instead of directly hitting the leaves or stem.
                 </p>
               </div>
@@ -182,40 +359,7 @@ function WateringTechnique() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              {[
-                {
-                  title: "Give Enough Water",
-                  text: "Add enough water to moisten the soil around the seedling.",
-                  icon: Droplets,
-                  bg: "bg-[#F1E3D4]",
-                  color: "text-[#9A6842]",
-                  border: "border-[#E7D5C3]",
-                },
-                {
-                  title: "Water Gently",
-                  text: "Use a gentle flow of water so the soil and seedling are not disturbed.",
-                  icon: Waves,
-                  bg: "bg-[#E3F5E8]",
-                  color: "text-[#2E9B59]",
-                  border: "border-[#D5E8D9]",
-                },
-                {
-                  title: "Water the Base",
-                  text: "Direct the water around the base instead of hitting the leaves or stem.",
-                  icon: Sprout,
-                  bg: "bg-[#FFF9E8]",
-                  color: "text-[#E4A72C]",
-                  border: "border-[#FFF0C7]",
-                },
-                {
-                  title: "Avoid Too Much or Too Little",
-                  text: "Maintain a proper amount of moisture without overwatering or underwatering.",
-                  icon: ShieldCheck,
-                  bg: "bg-[#F4EAF5]",
-                  color: "text-[#9B5FA6]",
-                  border: "border-[#E8D7E8]",
-                },
-              ].map((item) => {
+              {skills.map((item) => {
                 const Icon = item.icon;
 
                 return (
@@ -293,26 +437,169 @@ function WateringTechnique() {
             </div>
 
             <div className="mt-4 space-y-3">
-              {[
-                "Newly planted seedlings need enough water.",
-                "Water should be applied gently and evenly.",
-                "Water around the base instead of directly hitting the leaves or stem.",
-                "Avoid giving the seedling too much or too little water.",
-              ].map((item) => (
+              {summaryItems.map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
                   <CheckCircle2
                     size={16}
                     className="mt-0.5 shrink-0 text-[#7BD89A]"
                   />
 
-                  <p className="text-xs leading-5 text-[#68796E]">
-                    {item}
-                  </p>
+                  <p className="text-xs leading-5 text-[#68796E]">{item}</p>
                 </div>
               ))}
             </div>
           </section>
 
+          {/* Quiz History and Quiz Access */}
+          <section className="mt-6 overflow-hidden rounded-3xl border border-[#D5E8D9] bg-white shadow-sm">
+            <div className="h-2 bg-[#2E9B59]" />
+
+            <div className="p-5 sm:p-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E3F5E8] text-[#2E9B59]">
+                  <ClipboardCheck size={23} />
+                </div>
+
+                <div>
+                  <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#2E9B59]">
+                    Knowledge Check
+                  </p>
+
+                  <h2 className="text-lg font-extrabold text-[#294735]">
+                    Watering Technique Quiz
+                  </h2>
+                </div>
+              </div>
+
+              {loadingAttempt ? (
+                <div className="flex items-center justify-center gap-2 py-8 text-sm font-semibold text-[#718078]">
+                  <Loader2 size={19} className="animate-spin" />
+                  Checking your quiz history...
+                </div>
+              ) : !userId ? (
+                <div className="mt-5 rounded-2xl bg-[#FFF9E8] p-4">
+                  <p className="text-sm font-bold text-[#85632B]">
+                    Login Required
+                  </p>
+
+                  <p className="mt-1 text-xs leading-5 text-[#8C7954]">
+                    Please log in to access the quiz and save your results.
+                  </p>
+
+                  <Link
+                    to="/login"
+                    className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-[#2E9B59] px-5 py-3 text-sm font-extrabold text-white transition hover:bg-[#25834A]"
+                  >
+                    Login to Continue
+                  </Link>
+                </div>
+              ) : quizAttempt ? (
+                <div className="mt-5">
+                  <div className="rounded-2xl border border-[#D5E8D9] bg-[#F4FBF5] p-4 sm:p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div className="flex items-center gap-2">
+                        <Trophy size={19} className="text-[#D6A32E]" />
+
+                        <span className="text-sm font-extrabold text-[#294735]">
+                          Previous Quiz Attempt
+                        </span>
+                      </div>
+
+                      <span
+                        className={`rounded-full px-3 py-1 text-[10px] font-extrabold ${
+                          quizAttempt.status === "Passed"
+                            ? "bg-[#DDF5E5] text-[#25834A]"
+                            : "bg-[#FFF0D5] text-[#A66A12]"
+                        }`}
+                      >
+                        {quizAttempt.status || "Completed"}
+                      </span>
+                    </div>
+
+                    <div className="mt-5">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#7B8C80]">
+                        Your Score
+                      </p>
+
+                      <p className="mt-1 text-3xl font-extrabold text-[#2E9B59]">
+                        {quizAttempt.score}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 flex items-start gap-2 text-xs text-[#718078]">
+                      <CalendarDays
+                        size={15}
+                        className="mt-0.5 shrink-0 text-[#2E9B59]"
+                      />
+
+                      <span>
+                        Submitted: {formatDate(quizAttempt.time_submitted)}
+                      </span>
+                    </div>
+
+                    {quizAttempt.comment && (
+                      <div className="mt-4 rounded-xl bg-white p-3">
+                        <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#2E9B59]">
+                          Teacher's Comment
+                        </p>
+
+                        <p className="mt-1 text-xs leading-5 text-[#68796E]">
+                          {quizAttempt.comment}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-4 rounded-2xl bg-[#F8F5EA] p-4">
+                    <p className="text-xs font-bold text-[#856B36]">
+                      You Already Took This Quiz
+                    </p>
+
+                    <p className="mt-1 text-xs leading-5 text-[#8C7954]">
+                      Your previous result has been saved. To take the quiz
+                      again, delete your previous attempt first.
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleDeleteAttempt}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-5 py-3 text-sm font-extrabold text-red-600 transition hover:bg-red-100"
+                  >
+                    <Trash2 size={17} />
+                    Delete Previous Attempt
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-5">
+                  <div className="rounded-2xl bg-[#F4FBF5] p-4">
+                    <p className="text-sm font-bold text-[#294735]">
+                      Ready to Test Your Knowledge?
+                    </p>
+
+                    <p className="mt-1 text-xs leading-5 text-[#718078]">
+                      Complete the Watering Technique quiz to check what you
+                      have learned from this lesson. Your result will be saved
+                      automatically.
+                    </p>
+                  </div>
+
+                  {/* Hide Take Quiz button for superusers */}
+                  {!isSuperuser && (
+                    <Link
+                      to={QUIZ_ROUTE}
+                      className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#2E9B59] px-5 py-3.5 text-sm font-extrabold text-white shadow-sm transition hover:bg-[#25834A]"
+                    >
+                      <ClipboardCheck size={18} />
+                      Take Watering Technique Quiz
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Bottom Navigation Buttons */}
           <div className="mt-6 flex gap-3 pb-6">
             <Link
               to="/lessons"
