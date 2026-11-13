@@ -82,14 +82,14 @@ function Dashboard() {
             </motion.section> */}
 
             {/* QR Scanner */}
-            <motion.section
+            {/* <motion.section
               initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="px-5 mt-4"
             >
               <ScanQRCard />
-            </motion.section>
+            </motion.section> */}
 
             {/* Lessons */}
             {/* <section className="mt-9">
