@@ -442,7 +442,7 @@ function Welcome() {
           </motion.div> */}
 
           {/* Login and Register Buttons */}
-          <div className="grid grid-cols-2 gap-3 mt-5">
+          <div className="grid grid-cols-1 gap-3 mt-5">
             {/* LOGIN BUTTON */}
             <motion.div
               whileHover={
@@ -472,7 +472,7 @@ function Welcome() {
                   initial={{ x: "-110%" }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.35 }}
-                  className="absolute inset-0 bg-[#E0F4E5]"
+                  className="absolute w-full inset-0 bg-[#E0F4E5]"
                 />
 
                 <motion.div
@@ -510,11 +510,11 @@ function Welcome() {
                     }
               }
             >
-              <Link
+              {/* <Link
                 to="/register"
                 className="group relative overflow-hidden w-full h-[62px] bg-[#2E9B59] hover:bg-[#27834B] rounded-2xl flex items-center justify-center gap-2 text-white font-bold text-[15px] shadow-lg shadow-[#2E9B59]/25 hover:shadow-xl hover:shadow-[#2E9B59]/35 transition-colors"
               >
-                {/* Animated Shine */}
+               
                 <motion.div
                   initial={{ x: "-150%" }}
                   animate={shouldReduceMotion ? {} : { x: ["-150%", "150%"] }}
@@ -539,7 +539,7 @@ function Welcome() {
                 <motion.div className="relative z-10" whileHover={{ x: 4 }}>
                   <ArrowRight className="w-4 h-4" />
                 </motion.div>
-              </Link>
+              </Link> */}
             </motion.div>
           </div>
 

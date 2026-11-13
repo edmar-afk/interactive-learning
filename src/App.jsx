@@ -19,6 +19,8 @@ import SoilPreparationQuiz from "./components/quizzes/SoilPreparationQuiz";
 import HandlingOfSeedlingsQuiz from "./components/quizzes/HandlingOfSeedlingsQuiz";
 import SpacingOfPlantsQuiz from "./components/quizzes/SpacingOfPlantsQuiz";
 import WateringTechniqueQuiz from "./components/quizzes/WateringTechniquesQuiz";
+import Files from "./routes/Files";
+import Students from "./routes/Students";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -32,10 +34,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/files" element={<Files/>} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/profile" element={<Profile/>} />
-
+        <Route path="/students" element={<Students/>} />
 
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/multiple-choice" element={<MultipleChoice />} />

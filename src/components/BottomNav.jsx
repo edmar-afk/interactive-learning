@@ -1,94 +1,84 @@
 import React from "react";
-import {
-  House,
-  BookOpen,
-  QrCode,
-  User,
-  Brain,
-} from "lucide-react";
+import { House, BookOpen, FolderOpen, User, Users } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 function BottomNav() {
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  // GET LOGGED-IN USER
+  const getStoredUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem("userInfo") || "{}");
+    } catch {
+      return {};
+    }
+  };
+
+  const userInfo = getStoredUser();
+
+  // ONLY SUPERUSER CAN SEE STUDENTS
+  const isTeacher =
+    userInfo?.is_superuser === true || userInfo?.is_superuser === "true";
+
+  const isActive = (path) =>
+    location.pathname === path ||
+    (path !== "/dashboard" && location.pathname.startsWith(`${path}/`));
+
+  const navItems = [
+    {
+      name: "Home",
+      path: "/dashboard",
+      icon: House,
+    },
+    {
+      name: "Lessons",
+      path: "/lessons",
+      icon: BookOpen,
+    },
+    {
+      name: "Files",
+      path: "/files",
+      icon: FolderOpen,
+    },
+    {
+      name: "Students",
+      path: "/students",
+      icon: Users,
+      teacherOnly: true,
+    },
+    {
+      name: "Profile",
+      path: "/profile",
+      icon: User,
+    },
+  ];
+
+  // HIDE STUDENTS FOR NON-TEACHERS
+  const visibleNavItems = navItems.filter(
+    (item) => !item.teacherOnly || isTeacher,
+  );
 
   return (
-    <div className="sticky bottom-0 bg-white border-t border-[#E9EFEB] px-5 py-3 flex items-center justify-around z-50">
+    <nav className="fixed bottom-0 left-0 right-0 w-full bg-white border-t border-[#E9EFEB] px-3 py-3 flex items-center justify-around z-[9999] shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+      {visibleNavItems.map((item) => {
+        const Icon = item.icon;
+        const active = isActive(item.path);
 
-      {/* Home */}
-      <Link
-        to="/dashboard"
-        className={`flex flex-col items-center gap-1 transition-colors ${
-          isActive("/dashboard")
-            ? "text-[#2E9B59]"
-            : "text-[#91A097]"
-        }`}
-      >
-        <House size={21} strokeWidth={isActive("/dashboard") ? 2.7 : 2.3} />
+        return (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`flex flex-col items-center gap-1 transition-colors ${
+              active ? "text-[#2E9B59]" : "text-[#91A097]"
+            }`}
+          >
+            <Icon size={21} strokeWidth={active ? 2.7 : 2.3} />
 
-        <span className="text-[10px] font-bold">
-          Home
-        </span>
-      </Link>
-
-      {/* Lessons */}
-      <Link
-        to="/lessons"
-        className={`flex flex-col items-center gap-1 transition-colors ${
-          isActive("/lessons")
-            ? "text-[#2E9B59]"
-            : "text-[#91A097]"
-        }`}
-      >
-        <BookOpen size={21} strokeWidth={isActive("/lessons") ? 2.7 : 2.3} />
-
-        <span className="text-[10px] font-bold">
-          Lessons
-        </span>
-      </Link>
-
-      {/* Center Scan Button */}
-      {/* <button
-        className="-mt-8 w-14 h-14 rounded-full bg-[#2E9B59] text-white shadow-lg shadow-[#2E9B59]/30 flex items-center justify-center border-4 border-white transition active:scale-95"
-        aria-label="Scan QR Code"
-      >
-        <QrCode size={25} strokeWidth={2.2} />
-      </button> */}
-
-      {/* Quizz */}
-      {/* <Link
-        to="/quiz"
-        className={`flex flex-col items-center gap-1 transition-colors ${
-          isActive("/quiz")
-            ? "text-[#2E9B59]"
-            : "text-[#91A097]"
-        }`}
-      >
-        <Brain size={21} strokeWidth={isActive("/quiz") ? 2.7 : 2.3} />
-
-        <span className="text-[10px] font-bold">
-          Quizz
-        </span>
-      </Link> */}
-
-      {/* Profile */}
-      <Link
-        to="/profile"
-        className={`flex flex-col items-center gap-1 transition-colors ${
-          isActive("/profile")
-            ? "text-[#2E9B59]"
-            : "text-[#91A097]"
-        }`}
-      >
-        <User size={21} strokeWidth={isActive("/profile") ? 2.7 : 2.3} />
-
-        <span className="text-[10px] font-bold">
-          Profile
-        </span>
-      </Link>
-
-    </div>
+            <span className="text-[10px] font-bold">{item.name}</span>
+          </Link>
+        );
+      })}
+    </nav>
   );
 }
 

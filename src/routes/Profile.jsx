@@ -97,7 +97,6 @@ export default function Profile() {
 
   const username = user?.username || "No username";
 
-
   // Superuser = Teacher, otherwise Student
   const role = user?.is_superuser === true ? "Teacher" : "Student";
 
@@ -108,7 +107,6 @@ export default function Profile() {
     user?.last_name,
     user?.username,
   );
-
 
   // ============================================================
   // ANIMATION CONFIGURATION
@@ -170,7 +168,7 @@ export default function Profile() {
         icon: UserRound,
         color: "bg-blue-50 text-blue-600",
       },
-    
+
       {
         id: "role",
         title: "Account Role",
@@ -564,7 +562,6 @@ export default function Profile() {
                   value: user?.first_name || "Not provided",
                   icon: UserRound,
                 },
-               
               ].map((item, index, array) => {
                 const Icon = item.icon;
 
