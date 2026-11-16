@@ -17,6 +17,7 @@ import {
   Leaf,
 } from "lucide-react";
 import api from "../../assets/api";
+import FloatingBackButton from "../FloatingBackButton";
 
 // ======================================================
 // QUIZ DATA — SOIL PREPARATION
@@ -26,7 +27,6 @@ import api from "../../assets/api";
 // ======================================================
 
 export const soilPreparationQuestions = [
-
   // ====================================================
   // MULTIPLE CHOICE — 10 QUESTIONS
   // ====================================================
@@ -77,12 +77,7 @@ export const soilPreparationQuestions = [
     id: 4,
     type: "multiple-choice",
     question: "Which tool is suitable for loosening the soil?",
-    options: [
-      "Hammer",
-      "Shovel",
-      "Scissors",
-      "Paintbrush",
-    ],
+    options: ["Hammer", "Shovel", "Scissors", "Paintbrush"],
     answer: "Shovel",
     explanation:
       "A shovel is a suitable gardening tool for digging, turning, and loosening the soil.",
@@ -132,7 +127,8 @@ export const soilPreparationQuestions = [
   {
     id: 8,
     type: "multiple-choice",
-    question: "What should be done after loosening the soil and removing unwanted materials?",
+    question:
+      "What should be done after loosening the soil and removing unwanted materials?",
     options: [
       "Cover the area with stones",
       "Level the planting area",
@@ -167,8 +163,7 @@ export const soilPreparationQuestions = [
       "Compact soil, add weeds, and cover the area",
       "Remove fertile soil and leave the planting area uneven",
     ],
-    answer:
-      "Loosen soil, remove weeds and stones, and level the area",
+    answer: "Loosen soil, remove weeds and stones, and level the area",
     explanation:
       "Proper preparation involves loosening or tilling the soil, removing weeds and stones, and leveling the planting area.",
   },
@@ -183,24 +178,15 @@ export const soilPreparationQuestions = [
     type: "enumeration",
     question:
       "Enumerate the three important actions involved in preparing the soil for planting.",
-    answer: [
-      "loosen the soil",
-      "remove weeds",
-      "level the area",
-    ],
+    answer: ["loosen the soil", "remove weeds", "level the area"],
     explanation:
       "The important actions include loosening the soil, removing weeds and unwanted materials, and leveling the planting area.",
   },
   {
     id: 12,
     type: "enumeration",
-    question:
-      "Give three characteristics of properly prepared soil.",
-    answer: [
-      "loose",
-      "fertile",
-      "well-tilled",
-    ],
+    question: "Give three characteristics of properly prepared soil.",
+    answer: ["loose", "fertile", "well-tilled"],
     explanation:
       "Soil should be loose, fertile, and well-tilled to provide suitable conditions for plant growth.",
   },
@@ -209,19 +195,14 @@ export const soilPreparationQuestions = [
     type: "enumeration",
     question:
       "Name three unwanted materials that should be removed from the planting area.",
-    answer: [
-      "stones",
-      "weeds",
-      "unwanted materials",
-    ],
+    answer: ["stones", "weeds", "unwanted materials"],
     explanation:
       "Stones, weeds, and other unwanted materials should be removed to make the planting area clean and suitable.",
   },
   {
     id: 14,
     type: "enumeration",
-    question:
-      "Give three benefits of properly preparing the soil.",
+    question: "Give three benefits of properly preparing the soil.",
     answer: [
       "supports root growth",
       "helps roots spread",
@@ -235,37 +216,23 @@ export const soilPreparationQuestions = [
     type: "enumeration",
     question:
       "Enumerate three things you should do to make the planting area ready.",
-    answer: [
-      "loosen the soil",
-      "remove stones",
-      "remove weeds",
-    ],
+    answer: ["loosen the soil", "remove stones", "remove weeds"],
     explanation:
       "Loosening the soil and removing stones and weeds are important steps in preparing a planting area.",
   },
   {
     id: 16,
     type: "enumeration",
-    question:
-      "Name three things that help make soil suitable for planting.",
-    answer: [
-      "loose soil",
-      "fertile soil",
-      "well-tilled soil",
-    ],
+    question: "Name three things that help make soil suitable for planting.",
+    answer: ["loose soil", "fertile soil", "well-tilled soil"],
     explanation:
       "Loose, fertile, and well-tilled soil provides better conditions for seedlings and their roots.",
   },
   {
     id: 17,
     type: "enumeration",
-    question:
-      "Enumerate three resources that weeds compete with plants for.",
-    answer: [
-      "water",
-      "nutrients",
-      "soil nutrients",
-    ],
+    question: "Enumerate three resources that weeds compete with plants for.",
+    answer: ["water", "nutrients", "soil nutrients"],
     explanation:
       "Weeds compete with plants for water and nutrients. Removing them reduces competition for these resources.",
   },
@@ -274,19 +241,14 @@ export const soilPreparationQuestions = [
     type: "enumeration",
     question:
       "Give three important tasks involved in clearing the planting area.",
-    answer: [
-      "remove stones",
-      "remove weeds",
-      "remove unwanted materials",
-    ],
+    answer: ["remove stones", "remove weeds", "remove unwanted materials"],
     explanation:
       "Clearing the planting area means removing stones, weeds, and other unwanted materials.",
   },
   {
     id: 19,
     type: "enumeration",
-    question:
-      "Name three results of loosening and tilling the soil properly.",
+    question: "Name three results of loosening and tilling the soil properly.",
     answer: [
       "reduced soil compaction",
       "better root growth",
@@ -300,12 +262,7 @@ export const soilPreparationQuestions = [
     type: "enumeration",
     question:
       "Enumerate the four important soil preparation skills in the lesson.",
-    answer: [
-      "loosen soil",
-      "remove weeds",
-      "remove stones",
-      "level area",
-    ],
+    answer: ["loosen soil", "remove weeds", "remove stones", "level area"],
     explanation:
       "The four important skills are loosening the soil, removing weeds, removing stones, and leveling the planting area.",
   },
@@ -317,8 +274,7 @@ export const soilPreparationQuestions = [
   {
     id: 21,
     type: "fill-blank",
-    question:
-      "Properly prepared soil should be loose, fertile, and ______.",
+    question: "Properly prepared soil should be loose, fertile, and ______.",
     answer: ["well-tilled", "well tilled", "tilled"],
     explanation:
       "Well-tilled soil has been properly worked and loosened to prepare it for planting.",
@@ -335,8 +291,7 @@ export const soilPreparationQuestions = [
   {
     id: 23,
     type: "fill-blank",
-    question:
-      "A ______ is a suitable tool for loosening the soil.",
+    question: "A ______ is a suitable tool for loosening the soil.",
     answer: ["shovel"],
     explanation:
       "A shovel can be used to dig, turn, and loosen soil during preparation.",
@@ -371,8 +326,7 @@ export const soilPreparationQuestions = [
   {
     id: 27,
     type: "fill-blank",
-    question:
-      "Weeds compete with plants for water and ______.",
+    question: "Weeds compete with plants for water and ______.",
     answer: ["nutrients", "soil nutrients"],
     explanation:
       "Weeds take water and nutrients from the soil, which are also needed by growing plants.",
@@ -380,8 +334,7 @@ export const soilPreparationQuestions = [
   {
     id: 28,
     type: "fill-blank",
-    question:
-      "Proper soil preparation helps plant ______ grow and spread.",
+    question: "Proper soil preparation helps plant ______ grow and spread.",
     answer: ["roots", "root"],
     explanation:
       "Loose and well-prepared soil provides space for roots to grow and spread properly.",
@@ -389,8 +342,7 @@ export const soilPreparationQuestions = [
   {
     id: 29,
     type: "fill-blank",
-    question:
-      "Soil should be properly loosened to reduce ______.",
+    question: "Soil should be properly loosened to reduce ______.",
     answer: ["compaction", "soil compaction"],
     explanation:
       "Reducing soil compaction makes it easier for roots to penetrate and spread through the soil.",
@@ -398,8 +350,7 @@ export const soilPreparationQuestions = [
   {
     id: 30,
     type: "fill-blank",
-    question:
-      "The final planting area should be clean, prepared, and ______.",
+    question: "The final planting area should be clean, prepared, and ______.",
     answer: ["level", "leveled", "even"],
     explanation:
       "A level planting area provides an even surface and helps make the soil ready for planting.",
@@ -525,11 +476,7 @@ const checkAnswer = (question, userAnswer) => {
 // ======================================================
 
 const formatAnswer = (question, answer) => {
-  if (
-    answer === undefined ||
-    answer === null ||
-    String(answer).trim() === ""
-  ) {
+  if (answer === undefined || answer === null || String(answer).trim() === "") {
     return "No answer provided";
   }
 
@@ -563,7 +510,6 @@ const formatCorrectAnswer = (question) => {
 function QuestionReview({ questions, answers }) {
   return (
     <section className="mt-10 space-y-6 animate-[fadeIn_.6s_ease-out]">
-
       <div className="rounded-3xl bg-[#244C32] p-6 text-white sm:p-8">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
@@ -594,10 +540,7 @@ function QuestionReview({ questions, answers }) {
 
       {questions.map((question, index) => {
         const correct = checkAnswer(question, answers[question.id]);
-        const userAnswer = formatAnswer(
-          question,
-          answers[question.id]
-        );
+        const userAnswer = formatAnswer(question, answers[question.id]);
 
         return (
           <article
@@ -784,10 +727,7 @@ export default function SoilPreparationQuiz({
 
   const score = useMemo(() => {
     return questions.reduce((total, question) => {
-      return (
-        total +
-        (checkAnswer(question, answers[question.id]) ? 1 : 0)
-      );
+      return total + (checkAnswer(question, answers[question.id]) ? 1 : 0);
     }, 0);
   }, [answers, questions]);
 
@@ -835,12 +775,10 @@ export default function SoilPreparationQuiz({
     let userInfo;
 
     try {
-      userInfo = JSON.parse(
-        localStorage.getItem("userInfo") || "null"
-      );
+      userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
     } catch {
       setSubmitError(
-        "Unable to read your account information. Please log in again."
+        "Unable to read your account information. Please log in again.",
       );
       return;
     }
@@ -865,7 +803,7 @@ export default function SoilPreparationQuiz({
     try {
       const response = await api.post(
         `/api/quiz-scores/${userId}/`,
-        finalScore
+        finalScore,
       );
 
       if (response.status === 201 || response.status === 200) {
@@ -887,9 +825,7 @@ export default function SoilPreparationQuiz({
           behavior: "smooth",
         });
       } else {
-        setSubmitError(
-          "Your quiz result was not saved. Please try again."
-        );
+        setSubmitError("Your quiz result was not saved. Please try again.");
       }
     } catch (error) {
       console.error("Quiz submission failed:", error);
@@ -897,7 +833,7 @@ export default function SoilPreparationQuiz({
       setSubmitError(
         error.response?.data?.detail ||
           error.response?.data?.error ||
-          "Unable to submit your quiz. Please check your internet connection and try again."
+          "Unable to submit your quiz. Please check your internet connection and try again.",
       );
     } finally {
       setSubmitting(false);
@@ -919,10 +855,7 @@ export default function SoilPreparationQuiz({
   if (!questions.length) {
     return (
       <div className="rounded-3xl bg-white p-8 text-center shadow-sm">
-        <Sprout
-          className="mx-auto mb-3 text-green-500"
-          size={36}
-        />
+        <Sprout className="mx-auto mb-3 text-green-500" size={36} />
 
         <p className="font-bold text-gray-700">
           No quiz questions are available.
@@ -938,7 +871,7 @@ export default function SoilPreparationQuiz({
   if (submitted) {
     return (
       <div className="mx-auto w-full max-w-4xl pb-12">
-
+        <FloatingBackButton />
         <style>{`
           @keyframes fadeIn {
             from {
@@ -990,7 +923,6 @@ export default function SoilPreparationQuiz({
         {/* RESULTS CARD */}
 
         <div className="relative overflow-hidden rounded-3xl border border-green-100 bg-white p-6 shadow-xl sm:p-10 animate-[fadeIn_.5s_ease-out]">
-
           {percentage >= 70 &&
             Array.from({ length: 45 }).map((_, index) => (
               <span
@@ -1011,7 +943,6 @@ export default function SoilPreparationQuiz({
             ))}
 
           <div className="relative z-10 text-center">
-
             <div
               className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full ${
                 percentage >= 70
@@ -1019,11 +950,7 @@ export default function SoilPreparationQuiz({
                   : "bg-green-100 text-green-600"
               } animate-[pop_.7s_ease-out]`}
             >
-              {percentage >= 70 ? (
-                <Trophy size={50} />
-              ) : (
-                <Sprout size={50} />
-              )}
+              {percentage >= 70 ? <Trophy size={50} /> : <Sprout size={50} />}
             </div>
 
             <span className="inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-green-700">
@@ -1042,7 +969,6 @@ export default function SoilPreparationQuiz({
             {/* SCORE */}
 
             <div className="mx-auto mt-8 max-w-md rounded-3xl bg-[#EAF7EE] p-6">
-
               <p className="text-xs font-extrabold uppercase tracking-widest text-green-700">
                 Your Final Score
               </p>
@@ -1069,12 +995,8 @@ export default function SoilPreparationQuiz({
               </p>
 
               <div className="mt-5 grid grid-cols-2 gap-3">
-
                 <div className="rounded-2xl bg-white p-3">
-                  <CheckCircle2
-                    className="mx-auto text-green-500"
-                    size={21}
-                  />
+                  <CheckCircle2 className="mx-auto text-green-500" size={21} />
 
                   <p className="mt-1 text-xl font-black text-green-700">
                     {score}
@@ -1086,10 +1008,7 @@ export default function SoilPreparationQuiz({
                 </div>
 
                 <div className="rounded-2xl bg-white p-3">
-                  <XCircle
-                    className="mx-auto text-red-400"
-                    size={21}
-                  />
+                  <XCircle className="mx-auto text-red-400" size={21} />
 
                   <p className="mt-1 text-xl font-black text-red-500">
                     {questions.length - score}
@@ -1099,45 +1018,33 @@ export default function SoilPreparationQuiz({
                     Incorrect
                   </p>
                 </div>
-
               </div>
 
               <div className="mt-4 rounded-2xl bg-white p-4">
                 <div className="flex items-center justify-center gap-2">
-                  <Award
-                    size={18}
-                    className="text-yellow-500"
-                  />
+                  <Award size={18} className="text-yellow-500" />
 
                   <span className="text-sm font-extrabold text-[#294735]">
-                    {percentage >= 75
-                      ? "Passed"
-                      : "Needs Improvement"}
+                    {percentage >= 75 ? "Passed" : "Needs Improvement"}
                   </span>
                 </div>
               </div>
-
             </div>
 
             <div className="mt-7 flex items-center justify-center gap-2 text-sm font-bold text-green-700">
               <BookOpen size={18} />
               Scroll down to review all your answers.
             </div>
-
           </div>
         </div>
 
         {/* COMPLETE QUESTION REVIEW */}
 
-        <QuestionReview
-          questions={questions}
-          answers={answers}
-        />
+        <QuestionReview questions={questions} answers={answers} />
 
         {/* BACK TO LESSON — ALWAYS LAST */}
 
         <div className="mt-10 rounded-3xl border border-green-100 bg-white p-6 text-center shadow-lg sm:p-8">
-
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EAF7EE] text-[#2E9B59]">
             <Leaf size={29} />
           </div>
@@ -1147,9 +1054,8 @@ export default function SoilPreparationQuiz({
           </h3>
 
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
-            You have finished reviewing all your answers. Continue
-            learning and apply what you have learned in your next
-            lesson.
+            You have finished reviewing all your answers. Continue learning and
+            apply what you have learned in your next lesson.
           </p>
 
           <button
@@ -1160,9 +1066,7 @@ export default function SoilPreparationQuiz({
             <ArrowLeft size={18} />
             Back to Lesson
           </button>
-
         </div>
-
       </div>
     );
   }
@@ -1173,7 +1077,7 @@ export default function SoilPreparationQuiz({
 
   return (
     <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-3xl border border-[#DCEBDD] bg-white shadow-xl">
-
+      <FloatingBackButton />
       <style>{`
         @keyframes questionEnter {
           from {
@@ -1194,9 +1098,7 @@ export default function SoilPreparationQuiz({
       {/* HEADER */}
 
       <div className="bg-[#2E9B59] px-5 py-6 text-white sm:px-8">
-
         <div className="flex items-center justify-between gap-3">
-
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15">
               <ClipboardCheck size={23} />
@@ -1207,26 +1109,20 @@ export default function SoilPreparationQuiz({
                 Test Your Knowledge
               </p>
 
-              <h2 className="text-lg font-black">
-                {title}
-              </h2>
+              <h2 className="text-lg font-black">{title}</h2>
             </div>
           </div>
 
           <div className="rounded-xl bg-white/15 px-3 py-2 text-center">
-            <p className="text-[10px] font-bold text-white/70">
-              QUESTION
-            </p>
+            <p className="text-[10px] font-bold text-white/70">QUESTION</p>
 
             <p className="text-lg font-black">
               {currentIndex + 1}/{questions.length}
             </p>
           </div>
-
         </div>
 
         <div className="mt-6">
-
           <div className="mb-2 flex items-center justify-between text-xs font-bold text-white/80">
             <span>Quiz Progress</span>
             <span>{Math.round(progress)}%</span>
@@ -1238,16 +1134,13 @@ export default function SoilPreparationQuiz({
               style={{ width: `${progress}%` }}
             />
           </div>
-
         </div>
       </div>
 
       {/* QUIZ BODY */}
 
       <div className="p-5 sm:p-8">
-
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-
           <span
             className={`rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-wider ${
               typeColors[currentQuestion.type] || "bg-gray-100 text-gray-700"
@@ -1259,14 +1152,9 @@ export default function SoilPreparationQuiz({
           <span className="text-xs font-bold text-gray-400">
             {answeredCount} of {questions.length} answered
           </span>
-
         </div>
 
-        <div
-          key={currentQuestion.id}
-          className="question-enter"
-        >
-
+        <div key={currentQuestion.id} className="question-enter">
           <h3 className="text-xl font-extrabold leading-relaxed text-[#294735] sm:text-2xl">
             {currentQuestion.question}
           </h3>
@@ -1275,10 +1163,8 @@ export default function SoilPreparationQuiz({
 
           {currentQuestion.type === "multiple-choice" && (
             <div className="mt-7 space-y-3">
-
               {currentQuestion.options.map((option, index) => {
-                const selected =
-                  answers[currentQuestion.id] === option;
+                const selected = answers[currentQuestion.id] === option;
 
                 return (
                   <button
@@ -1318,7 +1204,6 @@ export default function SoilPreparationQuiz({
                   </button>
                 );
               })}
-
             </div>
           )}
 
@@ -1326,7 +1211,6 @@ export default function SoilPreparationQuiz({
 
           {currentQuestion.type === "enumeration" && (
             <div className="mt-7">
-
               <div className="mb-3 flex items-center gap-2 text-xs font-bold text-purple-600">
                 <ClipboardCheck size={16} />
                 Separate each answer with a comma or a new line.
@@ -1341,9 +1225,9 @@ export default function SoilPreparationQuiz({
               />
 
               <p className="mt-2 text-xs text-gray-400">
-                Enter all the required items. The order of your answers does not matter.
+                Enter all the required items. The order of your answers does not
+                matter.
               </p>
-
             </div>
           )}
 
@@ -1351,7 +1235,6 @@ export default function SoilPreparationQuiz({
 
           {currentQuestion.type === "fill-blank" && (
             <div className="mt-7">
-
               <label className="mb-3 block text-xs font-bold text-amber-700">
                 Your Answer
               </label>
@@ -1371,21 +1254,16 @@ export default function SoilPreparationQuiz({
                 placeholder="Type your answer here..."
                 className="w-full rounded-2xl border-2 border-amber-100 bg-amber-50/40 p-4 text-sm font-semibold text-gray-700 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-100"
               />
-
             </div>
           )}
-
         </div>
 
         {/* NAVIGATION */}
 
         <div className="mt-9 flex items-center justify-between gap-3 border-t border-gray-100 pt-6">
-
           <button
             type="button"
-            onClick={() =>
-              setCurrentIndex((previous) => previous - 1)
-            }
+            onClick={() => setCurrentIndex((previous) => previous - 1)}
             disabled={currentIndex === 0}
             className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-3 text-xs font-extrabold text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30"
           >
@@ -1396,9 +1274,7 @@ export default function SoilPreparationQuiz({
           {currentIndex < questions.length - 1 ? (
             <button
               type="button"
-              onClick={() =>
-                setCurrentIndex((previous) => previous + 1)
-              }
+              onClick={() => setCurrentIndex((previous) => previous + 1)}
               className="inline-flex items-center gap-2 rounded-xl bg-[#2E9B59] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-green-100 transition hover:-translate-y-0.5 hover:bg-[#247D46] active:scale-95"
             >
               Next Question
@@ -1408,9 +1284,7 @@ export default function SoilPreparationQuiz({
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={
-                answeredCount !== questions.length || submitting
-              }
+              disabled={answeredCount !== questions.length || submitting}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#2E9B59] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-green-100 transition hover:-translate-y-0.5 hover:bg-[#247D46] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {submitting ? (
@@ -1426,7 +1300,6 @@ export default function SoilPreparationQuiz({
               )}
             </button>
           )}
-
         </div>
 
         {/* SUBMISSION ERROR */}
@@ -1446,7 +1319,6 @@ export default function SoilPreparationQuiz({
               Answer all questions to enable submission.
             </p>
           )}
-
       </div>
     </div>
   );

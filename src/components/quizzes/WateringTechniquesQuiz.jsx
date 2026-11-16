@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -17,6 +16,7 @@ import {
   Droplets,
 } from "lucide-react";
 import api from "../../assets/api";
+import FloatingBackButton from "../FloatingBackButton";
 
 // ======================================================
 // QUIZ DATA — WATERING TECHNIQUE
@@ -176,7 +176,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 11,
     type: "enumeration",
-    question: "Name four important practices when watering newly planted seedlings.",
+    question:
+      "Name four important practices when watering newly planted seedlings.",
     answer: [
       "give enough water",
       "water gently",
@@ -190,10 +191,7 @@ export const wateringTechniqueQuestions = [
     id: 12,
     type: "enumeration",
     question: "Give two things that should be avoided when watering seedlings.",
-    answer: [
-      "overwatering",
-      "underwatering",
-    ],
+    answer: ["overwatering", "underwatering"],
     explanation:
       "Overwatering and underwatering should be avoided because both can negatively affect seedling growth.",
   },
@@ -201,11 +199,7 @@ export const wateringTechniqueQuestions = [
     id: 13,
     type: "enumeration",
     question: "Name three things that gentle watering helps protect.",
-    answer: [
-      "soil",
-      "seedling",
-      "roots",
-    ],
+    answer: ["soil", "seedling", "roots"],
     explanation:
       "Gentle watering helps prevent soil displacement and protects the delicate seedling and its developing roots.",
   },
@@ -213,34 +207,25 @@ export const wateringTechniqueQuestions = [
     id: 14,
     type: "enumeration",
     question: "Give three characteristics of proper watering.",
-    answer: [
-      "gentle application",
-      "even distribution",
-      "proper soil moisture",
-    ],
+    answer: ["gentle application", "even distribution", "proper soil moisture"],
     explanation:
       "Proper watering should be gentle, evenly distributed, and sufficient to maintain appropriate soil moisture.",
   },
   {
     id: 15,
     type: "enumeration",
-    question: "Name two plant parts or areas that should be protected from forceful watering.",
-    answer: [
-      "leaves",
-      "stem",
-    ],
+    question:
+      "Name two plant parts or areas that should be protected from forceful watering.",
+    answer: ["leaves", "stem"],
     explanation:
       "Water should not forcefully hit the leaves or stem because delicate plant parts can be damaged.",
   },
   {
     id: 16,
     type: "enumeration",
-    question: "List three watering mistakes that can negatively affect newly planted seedlings.",
-    answer: [
-      "overwatering",
-      "underwatering",
-      "using a strong stream of water",
-    ],
+    question:
+      "List three watering mistakes that can negatively affect newly planted seedlings.",
+    answer: ["overwatering", "underwatering", "using a strong stream of water"],
     explanation:
       "Giving too much water, giving insufficient water, and using a forceful stream are common watering mistakes.",
   },
@@ -259,7 +244,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 18,
     type: "enumeration",
-    question: "Give three reminders when applying water to a newly planted seedling.",
+    question:
+      "Give three reminders when applying water to a newly planted seedling.",
     answer: [
       "use a gentle flow",
       "direct water around the base",
@@ -271,7 +257,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 19,
     type: "enumeration",
-    question: "List three conditions that should be maintained when watering plants.",
+    question:
+      "List three conditions that should be maintained when watering plants.",
     answer: [
       "sufficient water",
       "even soil moisture",
@@ -301,7 +288,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 21,
     type: "fill-blank",
-    question: "Newly planted seedlings need _____ to help them adjust and grow.",
+    question:
+      "Newly planted seedlings need _____ to help them adjust and grow.",
     answer: ["water"],
     explanation:
       "Water is essential for newly planted seedlings as they adjust to their new environment and begin growing.",
@@ -325,7 +313,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 24,
     type: "fill-blank",
-    question: "Proper watering helps maintain the right amount of _____ in the soil.",
+    question:
+      "Proper watering helps maintain the right amount of _____ in the soil.",
     answer: ["moisture"],
     explanation:
       "Maintaining proper soil moisture provides the water needed by the seedling without excessively flooding the soil.",
@@ -349,7 +338,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 27,
     type: "fill-blank",
-    question: "A strong stream of water may disturb the _____ around a seedling.",
+    question:
+      "A strong stream of water may disturb the _____ around a seedling.",
     answer: ["soil"],
     explanation:
       "Forceful watering can displace the soil surrounding the seedling and expose or disturb its roots.",
@@ -373,7 +363,8 @@ export const wateringTechniqueQuestions = [
   {
     id: 30,
     type: "fill-blank",
-    question: "The goal of proper watering is to avoid giving plants too much or too little _____.",
+    question:
+      "The goal of proper watering is to avoid giving plants too much or too little _____.",
     answer: ["water"],
     explanation:
       "Proper watering means providing sufficient water while avoiding both overwatering and underwatering.",
@@ -470,9 +461,7 @@ const checkAnswer = (question, userAnswer) => {
   }
 
   if (question.type === "fill-blank") {
-    return question.answer
-      .map(normalize)
-      .includes(normalize(userAnswer));
+    return question.answer.map(normalize).includes(normalize(userAnswer));
   }
 
   if (question.type === "enumeration") {
@@ -489,11 +478,7 @@ const checkAnswer = (question, userAnswer) => {
 };
 
 const formatAnswer = (question, answer) => {
-  if (
-    answer === undefined ||
-    answer === null ||
-    String(answer).trim() === ""
-  ) {
+  if (answer === undefined || answer === null || String(answer).trim() === "") {
     return "No answer provided";
   }
 
@@ -509,9 +494,7 @@ const formatAnswer = (question, answer) => {
 };
 
 const formatCorrectAnswer = (question) =>
-  Array.isArray(question.answer)
-    ? question.answer.join(", ")
-    : question.answer;
+  Array.isArray(question.answer) ? question.answer.join(", ") : question.answer;
 
 // ======================================================
 // QUESTION REVIEW
@@ -550,18 +533,13 @@ function QuestionReview({ questions, answers }) {
 
       {questions.map((question, index) => {
         const correct = checkAnswer(question, answers[question.id]);
-        const userAnswer = formatAnswer(
-          question,
-          answers[question.id]
-        );
+        const userAnswer = formatAnswer(question, answers[question.id]);
 
         return (
           <article
             key={question.id}
             className={`overflow-hidden rounded-3xl border-2 bg-white shadow-sm transition-all duration-300 hover:shadow-lg ${
-              correct
-                ? "border-green-100"
-                : "border-red-100"
+              correct ? "border-green-100" : "border-red-100"
             }`}
           >
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 bg-gray-50/70 px-5 py-4 sm:px-7">
@@ -572,8 +550,7 @@ function QuestionReview({ questions, answers }) {
 
                 <span
                   className={`rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-wider ${
-                    typeColors[question.type] ||
-                    "bg-gray-100 text-gray-700"
+                    typeColors[question.type] || "bg-gray-100 text-gray-700"
                   }`}
                 >
                   {typeLabels[question.type] || question.type}
@@ -587,11 +564,7 @@ function QuestionReview({ questions, answers }) {
                     : "bg-red-100 text-red-600"
                 }`}
               >
-                {correct ? (
-                  <CheckCircle2 size={15} />
-                ) : (
-                  <XCircle size={15} />
-                )}
+                {correct ? <CheckCircle2 size={15} /> : <XCircle size={15} />}
 
                 {correct ? "Correct" : "Incorrect"}
               </span>
@@ -606,12 +579,10 @@ function QuestionReview({ questions, answers }) {
                 <div className="mt-5 space-y-2">
                   {question.options.map((option, optionIndex) => {
                     const isSelected =
-                      normalize(answers[question.id]) ===
-                      normalize(option);
+                      normalize(answers[question.id]) === normalize(option);
 
                     const isAnswer =
-                      normalize(question.answer) ===
-                      normalize(option);
+                      normalize(question.answer) === normalize(option);
 
                     return (
                       <div
@@ -682,9 +653,7 @@ function QuestionReview({ questions, answers }) {
 
                   <p
                     className={`break-words text-sm font-bold leading-relaxed ${
-                      correct
-                        ? "text-green-800"
-                        : "text-red-700"
+                      correct ? "text-green-800" : "text-red-700"
                     }`}
                   >
                     {userAnswer}
@@ -750,11 +719,10 @@ export default function WateringTechniqueQuiz({
     () =>
       questions.reduce(
         (total, question) =>
-          total +
-          (checkAnswer(question, answers[question.id]) ? 1 : 0),
-        0
+          total + (checkAnswer(question, answers[question.id]) ? 1 : 0),
+        0,
       ),
-    [answers, questions]
+    [answers, questions],
   );
 
   const percentage = questions.length
@@ -764,8 +732,7 @@ export default function WateringTechniqueQuiz({
   const comment = getComment(percentage);
 
   const answeredCount = questions.filter(
-    (question) =>
-      String(answers[question.id] ?? "").trim().length > 0
+    (question) => String(answers[question.id] ?? "").trim().length > 0,
   ).length;
 
   const progress = questions.length
@@ -785,26 +752,21 @@ export default function WateringTechniqueQuiz({
     if (submitting) return;
 
     const allAnswered = questions.every(
-      (question) =>
-        String(answers[question.id] ?? "").trim().length > 0
+      (question) => String(answers[question.id] ?? "").trim().length > 0,
     );
 
     if (!allAnswered) {
-      window.alert(
-        "Please answer all questions before submitting."
-      );
+      window.alert("Please answer all questions before submitting.");
       return;
     }
 
     let userInfo;
 
     try {
-      userInfo = JSON.parse(
-        localStorage.getItem("userInfo") || "null"
-      );
+      userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
     } catch {
       setSubmitError(
-        "Unable to read your account information. Please log in again."
+        "Unable to read your account information. Please log in again.",
       );
       return;
     }
@@ -812,9 +774,7 @@ export default function WateringTechniqueQuiz({
     const userId = userInfo?.id;
 
     if (!userId) {
-      setSubmitError(
-        "User ID not found. Please log in again."
-      );
+      setSubmitError("User ID not found. Please log in again.");
       return;
     }
 
@@ -831,7 +791,7 @@ export default function WateringTechniqueQuiz({
     try {
       const response = await api.post(
         `/api/quiz-scores/${userId}/`,
-        finalScore
+        finalScore,
       );
 
       if (response.status === 201 || response.status === 200) {
@@ -853,9 +813,7 @@ export default function WateringTechniqueQuiz({
           behavior: "smooth",
         });
       } else {
-        setSubmitError(
-          "Your quiz result was not saved. Please try again."
-        );
+        setSubmitError("Your quiz result was not saved. Please try again.");
       }
     } catch (error) {
       console.error("Quiz submission failed:", error);
@@ -863,7 +821,7 @@ export default function WateringTechniqueQuiz({
       setSubmitError(
         error.response?.data?.detail ||
           error.response?.data?.error ||
-          "Unable to submit your quiz. Please check your internet connection and try again."
+          "Unable to submit your quiz. Please check your internet connection and try again.",
       );
     } finally {
       setSubmitting(false);
@@ -877,10 +835,7 @@ export default function WateringTechniqueQuiz({
   if (!questions.length) {
     return (
       <div className="rounded-3xl bg-white p-8 text-center shadow-sm">
-        <Sprout
-          className="mx-auto mb-3 text-green-500"
-          size={36}
-        />
+        <Sprout className="mx-auto mb-3 text-green-500" size={36} />
 
         <p className="font-bold text-gray-700">
           No quiz questions are available.
@@ -896,6 +851,7 @@ export default function WateringTechniqueQuiz({
   if (submitted) {
     return (
       <div className="mx-auto w-full max-w-4xl pb-12">
+        <FloatingBackButton />
         <style>{`
           @keyframes fadeIn {
             from {
@@ -973,11 +929,7 @@ export default function WateringTechniqueQuiz({
                   : "bg-green-100 text-green-600"
               }`}
             >
-              {percentage >= 70 ? (
-                <Trophy size={50} />
-              ) : (
-                <Sprout size={50} />
-              )}
+              {percentage >= 70 ? <Trophy size={50} /> : <Sprout size={50} />}
             </div>
 
             <span className="inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-green-700">
@@ -1022,10 +974,7 @@ export default function WateringTechniqueQuiz({
 
               <div className="mt-5 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-white p-3">
-                  <CheckCircle2
-                    className="mx-auto text-green-500"
-                    size={21}
-                  />
+                  <CheckCircle2 className="mx-auto text-green-500" size={21} />
 
                   <p className="mt-1 text-xl font-black text-green-700">
                     {score}
@@ -1037,10 +986,7 @@ export default function WateringTechniqueQuiz({
                 </div>
 
                 <div className="rounded-2xl bg-white p-3">
-                  <XCircle
-                    className="mx-auto text-red-400"
-                    size={21}
-                  />
+                  <XCircle className="mx-auto text-red-400" size={21} />
 
                   <p className="mt-1 text-xl font-black text-red-500">
                     {questions.length - score}
@@ -1057,9 +1003,7 @@ export default function WateringTechniqueQuiz({
                   <Award size={18} className="text-yellow-500" />
 
                   <span className="text-sm font-extrabold text-[#294735]">
-                    {percentage >= 75
-                      ? "Passed"
-                      : "Needs Improvement"}
+                    {percentage >= 75 ? "Passed" : "Needs Improvement"}
                   </span>
                 </div>
               </div>
@@ -1073,10 +1017,7 @@ export default function WateringTechniqueQuiz({
         </div>
 
         {/* Complete Answer Review */}
-        <QuestionReview
-          questions={questions}
-          answers={answers}
-        />
+        <QuestionReview questions={questions} answers={answers} />
 
         {/* Back to Lesson - Last Section */}
         <div className="mt-10 rounded-3xl border border-green-100 bg-white p-6 text-center shadow-lg sm:p-8">
@@ -1089,9 +1030,8 @@ export default function WateringTechniqueQuiz({
           </h3>
 
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
-            You have finished reviewing all your answers.
-            Continue learning and apply proper watering techniques
-            to your newly planted seedlings.
+            You have finished reviewing all your answers. Continue learning and
+            apply proper watering techniques to your newly planted seedlings.
           </p>
 
           <button
@@ -1113,6 +1053,7 @@ export default function WateringTechniqueQuiz({
 
   return (
     <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-3xl border border-[#DCEBDD] bg-white shadow-xl">
+      <FloatingBackButton />
       <style>{`
         @keyframes questionEnter {
           from {
@@ -1143,16 +1084,12 @@ export default function WateringTechniqueQuiz({
                 Test Your Knowledge
               </p>
 
-              <h2 className="text-lg font-black">
-                {title}
-              </h2>
+              <h2 className="text-lg font-black">{title}</h2>
             </div>
           </div>
 
           <div className="rounded-xl bg-white/15 px-3 py-2 text-center">
-            <p className="text-[10px] font-bold text-white/70">
-              QUESTION
-            </p>
+            <p className="text-[10px] font-bold text-white/70">QUESTION</p>
 
             <p className="text-lg font-black">
               {currentIndex + 1}/{questions.length}
@@ -1181,12 +1118,10 @@ export default function WateringTechniqueQuiz({
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <span
             className={`rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-wider ${
-              typeColors[currentQuestion.type] ||
-              "bg-gray-100 text-gray-700"
+              typeColors[currentQuestion.type] || "bg-gray-100 text-gray-700"
             }`}
           >
-            {typeLabels[currentQuestion.type] ||
-              currentQuestion.type}
+            {typeLabels[currentQuestion.type] || currentQuestion.type}
           </span>
 
           <span className="text-xs font-bold text-gray-400">
@@ -1194,10 +1129,7 @@ export default function WateringTechniqueQuiz({
           </span>
         </div>
 
-        <div
-          key={currentQuestion.id}
-          className="question-enter"
-        >
+        <div key={currentQuestion.id} className="question-enter">
           <h3 className="text-xl font-extrabold leading-relaxed text-[#294735] sm:text-2xl">
             {currentQuestion.question}
           </h3>
@@ -1206,8 +1138,7 @@ export default function WateringTechniqueQuiz({
           {currentQuestion.type === "multiple-choice" && (
             <div className="mt-7 space-y-3">
               {currentQuestion.options.map((option, index) => {
-                const selected =
-                  answers[currentQuestion.id] === option;
+                const selected = answers[currentQuestion.id] === option;
 
                 return (
                   <button
@@ -1232,9 +1163,7 @@ export default function WateringTechniqueQuiz({
 
                     <span
                       className={`flex-1 text-sm font-bold ${
-                        selected
-                          ? "text-green-800"
-                          : "text-gray-600"
+                        selected ? "text-green-800" : "text-gray-600"
                       }`}
                     >
                       {option}
@@ -1262,19 +1191,15 @@ export default function WateringTechniqueQuiz({
 
               <textarea
                 value={answers[currentQuestion.id] || ""}
-                onChange={(event) =>
-                  setAnswer(event.target.value)
-                }
+                onChange={(event) => setAnswer(event.target.value)}
                 rows={5}
-                placeholder={
-                  "First answer\nSecond answer\nThird answer"
-                }
+                placeholder={"First answer\nSecond answer\nThird answer"}
                 className="w-full resize-none rounded-2xl border-2 border-purple-100 bg-purple-50/40 p-4 text-sm font-semibold text-gray-700 outline-none transition focus:border-purple-400 focus:bg-white focus:ring-4 focus:ring-purple-100"
               />
 
               <p className="mt-2 text-xs text-gray-400">
-                Enter all the required items. The order of your
-                answers does not matter.
+                Enter all the required items. The order of your answers does not
+                matter.
               </p>
             </div>
           )}
@@ -1289,9 +1214,7 @@ export default function WateringTechniqueQuiz({
               <input
                 type="text"
                 value={answers[currentQuestion.id] || ""}
-                onChange={(event) =>
-                  setAnswer(event.target.value)
-                }
+                onChange={(event) => setAnswer(event.target.value)}
                 onKeyDown={(event) => {
                   if (
                     event.key === "Enter" &&
@@ -1311,9 +1234,7 @@ export default function WateringTechniqueQuiz({
         <div className="mt-9 flex items-center justify-between gap-3 border-t border-gray-100 pt-6">
           <button
             type="button"
-            onClick={() =>
-              setCurrentIndex((previous) => previous - 1)
-            }
+            onClick={() => setCurrentIndex((previous) => previous - 1)}
             disabled={currentIndex === 0 || submitting}
             className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-3 text-xs font-extrabold text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30"
           >
@@ -1324,9 +1245,7 @@ export default function WateringTechniqueQuiz({
           {currentIndex < questions.length - 1 ? (
             <button
               type="button"
-              onClick={() =>
-                setCurrentIndex((previous) => previous + 1)
-              }
+              onClick={() => setCurrentIndex((previous) => previous + 1)}
               className="inline-flex items-center gap-2 rounded-xl bg-[#2E9B59] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-green-100 transition hover:-translate-y-0.5 hover:bg-[#247D46] active:scale-95"
             >
               Next Question
@@ -1336,9 +1255,7 @@ export default function WateringTechniqueQuiz({
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={
-                answeredCount !== questions.length || submitting
-              }
+              disabled={answeredCount !== questions.length || submitting}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#2E9B59] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-green-100 transition hover:-translate-y-0.5 hover:bg-[#247D46] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {submitting ? (

@@ -17,6 +17,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import api from "../../assets/api";
+import FloatingBackButton from "../FloatingBackButton";
 
 // ======================================================
 // QUIZ DATA — HANDLING OF SEEDLINGS
@@ -866,6 +867,7 @@ export default function HandlingOfSeedlingsQuiz({
   if (submitted) {
     return (
       <div className="mx-auto w-full max-w-4xl pb-12">
+        <FloatingBackButton/>
         <style>{`
           @keyframes fadeIn {
             from {
@@ -1067,6 +1069,7 @@ export default function HandlingOfSeedlingsQuiz({
 
   return (
     <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-3xl border border-[#DCEBDD] bg-white shadow-xl">
+      <FloatingBackButton/>
       <style>{`
         @keyframes questionEnter {
           from {

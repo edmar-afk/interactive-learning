@@ -15,6 +15,7 @@ import {
   Leaf,
 } from "lucide-react";
 import api from "../../assets/api";
+import FloatingBackButton from "../FloatingBackButton";
 
 // ======================================================
 // QUIZ DATA — SPACING OF PLANTS
@@ -42,7 +43,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 2,
     type: "multiple-choice",
-    question: "What should a gardener do to maintain equal spacing between plants?",
+    question:
+      "What should a gardener do to maintain equal spacing between plants?",
     options: [
       "Estimate every distance without checking",
       "Measure the recommended distance before planting",
@@ -70,8 +72,14 @@ export const spacingOfPlantsQuestions = [
   {
     id: 4,
     type: "multiple-choice",
-    question: "Which resource can plants receive more effectively when they are properly spaced?",
-    options: ["Sunlight", "Plastic materials", "Artificial decorations", "Unused containers"],
+    question:
+      "Which resource can plants receive more effectively when they are properly spaced?",
+    options: [
+      "Sunlight",
+      "Plastic materials",
+      "Artificial decorations",
+      "Unused containers",
+    ],
     answer: "Sunlight",
     explanation:
       "Proper spacing helps prevent nearby plants from excessively shading one another, allowing better access to sunlight.",
@@ -156,7 +164,8 @@ export const spacingOfPlantsQuestions = [
       "Leaving large random gaps without considering the crop",
       "Placing seedlings wherever there is an empty spot",
     ],
-    answer: "Following the recommended distance and keeping plants evenly arranged",
+    answer:
+      "Following the recommended distance and keeping plants evenly arranged",
     explanation:
       "Proper spacing means following the crop's recommended distance and arranging plants uniformly.",
   },
@@ -165,7 +174,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 11,
     type: "enumeration",
-    question: "Name four things plants need enough access to when properly spaced.",
+    question:
+      "Name four things plants need enough access to when properly spaced.",
     answer: ["sunlight", "water", "nutrients", "air"],
     explanation:
       "Proper spacing helps plants access sunlight, water, nutrients, and air.",
@@ -173,7 +183,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 12,
     type: "enumeration",
-    question: "Give two actions that help maintain uniform spacing when planting.",
+    question:
+      "Give two actions that help maintain uniform spacing when planting.",
     answer: ["measure the distance", "mark the planting positions"],
     explanation:
       "Measuring distances and marking planting positions help keep plants evenly arranged.",
@@ -181,7 +192,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 13,
     type: "enumeration",
-    question: "Name three things plants may compete for when planted too close together.",
+    question:
+      "Name three things plants may compete for when planted too close together.",
     answer: ["sunlight", "water", "nutrients"],
     explanation:
       "Crowded plants may compete for sunlight, water, and nutrients. They also compete for physical growing space.",
@@ -197,7 +209,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 15,
     type: "enumeration",
-    question: "Name two plant parts or systems that benefit from having enough growing space.",
+    question:
+      "Name two plant parts or systems that benefit from having enough growing space.",
     answer: ["roots", "leaves"],
     explanation:
       "Adequate spacing gives roots room to develop and gives leaves more access to light and air.",
@@ -213,7 +226,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 17,
     type: "enumeration",
-    question: "Name three resources or conditions that support healthy plant growth and are considered in spacing.",
+    question:
+      "Name three resources or conditions that support healthy plant growth and are considered in spacing.",
     answer: ["sunlight", "water", "nutrients"],
     explanation:
       "Sunlight, water, and nutrients are essential resources that properly spaced plants can access more effectively.",
@@ -221,7 +235,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 18,
     type: "enumeration",
-    question: "Give two reasons the recommended spacing can differ from one crop to another.",
+    question:
+      "Give two reasons the recommended spacing can differ from one crop to another.",
     answer: ["different plant size", "different growth habits"],
     explanation:
       "Crops differ in their mature size and growth habits, so they do not all require the same distance.",
@@ -229,8 +244,13 @@ export const spacingOfPlantsQuestions = [
   {
     id: 19,
     type: "enumeration",
-    question: "List three benefits of maintaining proper spacing between plants.",
-    answer: ["better sunlight access", "less competition", "room for root growth"],
+    question:
+      "List three benefits of maintaining proper spacing between plants.",
+    answer: [
+      "better sunlight access",
+      "less competition",
+      "room for root growth",
+    ],
     explanation:
       "Proper spacing improves access to sunlight, reduces competition for resources, and provides room for roots to grow.",
   },
@@ -238,7 +258,12 @@ export const spacingOfPlantsQuestions = [
     id: 20,
     type: "enumeration",
     question: "State four reminders when spacing plants before planting.",
-    answer: ["know the crop", "follow recommended distance", "measure distance", "keep plants uniform"],
+    answer: [
+      "know the crop",
+      "follow recommended distance",
+      "measure distance",
+      "keep plants uniform",
+    ],
     explanation:
       "Identify the crop, follow its recommended distance, measure carefully, and keep the arrangement uniform.",
   },
@@ -247,7 +272,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 21,
     type: "fill-blank",
-    question: "Giving plants enough space helps them receive sunlight, water, and _____.",
+    question:
+      "Giving plants enough space helps them receive sunlight, water, and _____.",
     answer: ["nutrients"],
     explanation:
       "Plants need nutrients along with sunlight and water for healthy growth.",
@@ -255,7 +281,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 22,
     type: "fill-blank",
-    question: "The practice of keeping plants at reasonably equal distances is called _____ spacing.",
+    question:
+      "The practice of keeping plants at reasonably equal distances is called _____ spacing.",
     answer: ["uniform"],
     explanation:
       "Uniform spacing means keeping a consistent distance between plants.",
@@ -271,7 +298,8 @@ export const spacingOfPlantsQuestions = [
   {
     id: 24,
     type: "fill-blank",
-    question: "Plants placed too close together may _____ for water and nutrients.",
+    question:
+      "Plants placed too close together may _____ for water and nutrients.",
     answer: ["compete"],
     explanation:
       "Crowded plants compete with nearby plants for limited resources such as water and nutrients.",
@@ -281,13 +309,13 @@ export const spacingOfPlantsQuestions = [
     type: "fill-blank",
     question: "Proper spacing allows enough _____ to move around the plants.",
     answer: ["air"],
-    explanation:
-      "Adequate spacing allows air to move around leaves and stems.",
+    explanation: "Adequate spacing allows air to move around leaves and stems.",
   },
   {
     id: 26,
     type: "fill-blank",
-    question: "Different crops may require different spacing because they have different growth _____.",
+    question:
+      "Different crops may require different spacing because they have different growth _____.",
     answer: ["habits"],
     explanation:
       "Crops differ in their growth habits and mature sizes, which affect their recommended spacing.",
@@ -458,7 +486,9 @@ function QuestionReview({ questions, answers }) {
             <BookOpen size={25} />
           </div>
           <div>
-            <h2 className="text-xl font-black sm:text-2xl">Review Your Answers</h2>
+            <h2 className="text-xl font-black sm:text-2xl">
+              Review Your Answers
+            </h2>
             <p className="mt-1 text-xs font-medium text-white/70">
               Review every question, your answer, and the correct explanation.
             </p>
@@ -500,7 +530,9 @@ function QuestionReview({ questions, answers }) {
               </div>
               <span
                 className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-extrabold ${
-                  correct ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"
+                  correct
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-600"
                 }`}
               >
                 {correct ? <CheckCircle2 size={15} /> : <XCircle size={15} />}
@@ -516,8 +548,10 @@ function QuestionReview({ questions, answers }) {
               {question.type === "multiple-choice" && (
                 <div className="mt-5 space-y-2">
                   {question.options.map((option, optionIndex) => {
-                    const isSelected = normalize(answers[question.id]) === normalize(option);
-                    const isAnswer = normalize(question.answer) === normalize(option);
+                    const isSelected =
+                      normalize(answers[question.id]) === normalize(option);
+                    const isAnswer =
+                      normalize(question.answer) === normalize(option);
                     return (
                       <div
                         key={optionIndex}
@@ -542,13 +576,27 @@ function QuestionReview({ questions, answers }) {
                         </span>
                         <span
                           className={`flex-1 text-sm font-semibold ${
-                            isAnswer ? "text-green-800" : isSelected ? "text-red-700" : "text-gray-600"
+                            isAnswer
+                              ? "text-green-800"
+                              : isSelected
+                                ? "text-red-700"
+                                : "text-gray-600"
                           }`}
                         >
                           {option}
                         </span>
-                        {isAnswer && <CheckCircle2 size={19} className="shrink-0 text-green-600" />}
-                        {!isAnswer && isSelected && <XCircle size={19} className="shrink-0 text-red-500" />}
+                        {isAnswer && (
+                          <CheckCircle2
+                            size={19}
+                            className="shrink-0 text-green-600"
+                          />
+                        )}
+                        {!isAnswer && isSelected && (
+                          <XCircle
+                            size={19}
+                            className="shrink-0 text-red-500"
+                          />
+                        )}
                       </div>
                     );
                   })}
@@ -558,7 +606,9 @@ function QuestionReview({ questions, answers }) {
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <div
                   className={`rounded-2xl border p-4 ${
-                    correct ? "border-green-100 bg-green-50" : "border-red-100 bg-red-50"
+                    correct
+                      ? "border-green-100 bg-green-50"
+                      : "border-red-100 bg-red-50"
                   }`}
                 >
                   <p className="mb-2 flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-wider text-gray-500">
@@ -591,7 +641,9 @@ function QuestionReview({ questions, answers }) {
                     Explanation
                   </p>
                 </div>
-                <p className="text-sm leading-7 text-blue-900/80">{question.explanation}</p>
+                <p className="text-sm leading-7 text-blue-900/80">
+                  {question.explanation}
+                </p>
               </div>
             </div>
           </article>
@@ -623,18 +675,23 @@ export default function SpacingOfPlantsQuiz({
   const score = useMemo(
     () =>
       questions.reduce(
-        (total, question) => total + (checkAnswer(question, answers[question.id]) ? 1 : 0),
-        0
+        (total, question) =>
+          total + (checkAnswer(question, answers[question.id]) ? 1 : 0),
+        0,
       ),
-    [answers, questions]
+    [answers, questions],
   );
 
-  const percentage = questions.length ? Math.round((score / questions.length) * 100) : 0;
+  const percentage = questions.length
+    ? Math.round((score / questions.length) * 100)
+    : 0;
   const comment = getComment(percentage);
   const answeredCount = questions.filter(
-    (question) => String(answers[question.id] ?? "").trim().length > 0
+    (question) => String(answers[question.id] ?? "").trim().length > 0,
   ).length;
-  const progress = questions.length ? ((currentIndex + 1) / questions.length) * 100 : 0;
+  const progress = questions.length
+    ? ((currentIndex + 1) / questions.length) * 100
+    : 0;
 
   const setAnswer = (value) => {
     if (!currentQuestion) return;
@@ -645,7 +702,7 @@ export default function SpacingOfPlantsQuiz({
     if (submitting) return;
 
     const allAnswered = questions.every(
-      (question) => String(answers[question.id] ?? "").trim().length > 0
+      (question) => String(answers[question.id] ?? "").trim().length > 0,
     );
 
     if (!allAnswered) {
@@ -657,7 +714,9 @@ export default function SpacingOfPlantsQuiz({
     try {
       userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
     } catch {
-      setSubmitError("Unable to read your account information. Please log in again.");
+      setSubmitError(
+        "Unable to read your account information. Please log in again.",
+      );
       return;
     }
 
@@ -678,7 +737,10 @@ export default function SpacingOfPlantsQuiz({
     };
 
     try {
-      const response = await api.post(`/api/quiz-scores/${userId}/`, finalScore);
+      const response = await api.post(
+        `/api/quiz-scores/${userId}/`,
+        finalScore,
+      );
       if (response.status === 201 || response.status === 200) {
         setSubmitted(true);
         onComplete?.({
@@ -700,7 +762,7 @@ export default function SpacingOfPlantsQuiz({
       setSubmitError(
         error.response?.data?.detail ||
           error.response?.data?.error ||
-          "Unable to submit your quiz. Please check your internet connection and try again."
+          "Unable to submit your quiz. Please check your internet connection and try again.",
       );
     } finally {
       setSubmitting(false);
@@ -715,7 +777,9 @@ export default function SpacingOfPlantsQuiz({
     return (
       <div className="rounded-3xl bg-white p-8 text-center shadow-sm">
         <Sprout className="mx-auto mb-3 text-green-500" size={36} />
-        <p className="font-bold text-gray-700">No quiz questions are available.</p>
+        <p className="font-bold text-gray-700">
+          No quiz questions are available.
+        </p>
       </div>
     );
   }
@@ -723,6 +787,7 @@ export default function SpacingOfPlantsQuiz({
   if (submitted) {
     return (
       <div className="mx-auto w-full max-w-4xl pb-12">
+        <FloatingBackButton />
         <style>{`
           @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px) scale(.97); }
@@ -752,7 +817,13 @@ export default function SpacingOfPlantsQuiz({
                 className="quiz-confetti"
                 style={{
                   left: `${(index * 37) % 100}%`,
-                  backgroundColor: ["#2E9B59", "#F5C542", "#60A5FA", "#F472B6", "#A78BFA"][index % 5],
+                  backgroundColor: [
+                    "#2E9B59",
+                    "#F5C542",
+                    "#60A5FA",
+                    "#F472B6",
+                    "#A78BFA",
+                  ][index % 5],
                   animationDelay: `${(index % 12) * 0.12}s`,
                 }}
               />
@@ -761,7 +832,9 @@ export default function SpacingOfPlantsQuiz({
           <div className="relative z-10 text-center">
             <div
               className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full ${
-                percentage >= 70 ? "bg-yellow-100 text-yellow-500" : "bg-green-100 text-green-600"
+                percentage >= 70
+                  ? "bg-yellow-100 text-yellow-500"
+                  : "bg-green-100 text-green-600"
               } animate-[pop_.7s_ease-out]`}
             >
               {percentage >= 70 ? <Trophy size={50} /> : <Sprout size={50} />}
@@ -781,8 +854,12 @@ export default function SpacingOfPlantsQuiz({
                 Your Final Score
               </p>
               <div className="mt-3 flex items-baseline justify-center gap-2">
-                <span className="text-6xl font-black text-[#2E9B59]">{score}</span>
-                <span className="text-2xl font-bold text-green-700/50">/ {questions.length}</span>
+                <span className="text-6xl font-black text-[#2E9B59]">
+                  {score}
+                </span>
+                <span className="text-2xl font-bold text-green-700/50">
+                  / {questions.length}
+                </span>
               </div>
               <div className="mt-4 h-3 overflow-hidden rounded-full bg-green-200">
                 <div
@@ -790,17 +867,27 @@ export default function SpacingOfPlantsQuiz({
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <p className="mt-3 text-2xl font-black text-[#244C32]">{percentage}%</p>
+              <p className="mt-3 text-2xl font-black text-[#244C32]">
+                {percentage}%
+              </p>
               <div className="mt-5 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-white p-3">
                   <CheckCircle2 className="mx-auto text-green-500" size={21} />
-                  <p className="mt-1 text-xl font-black text-green-700">{score}</p>
-                  <p className="text-[10px] font-bold uppercase text-gray-400">Correct</p>
+                  <p className="mt-1 text-xl font-black text-green-700">
+                    {score}
+                  </p>
+                  <p className="text-[10px] font-bold uppercase text-gray-400">
+                    Correct
+                  </p>
                 </div>
                 <div className="rounded-2xl bg-white p-3">
                   <XCircle className="mx-auto text-red-400" size={21} />
-                  <p className="mt-1 text-xl font-black text-red-500">{questions.length - score}</p>
-                  <p className="text-[10px] font-bold uppercase text-gray-400">Incorrect</p>
+                  <p className="mt-1 text-xl font-black text-red-500">
+                    {questions.length - score}
+                  </p>
+                  <p className="text-[10px] font-bold uppercase text-gray-400">
+                    Incorrect
+                  </p>
                 </div>
               </div>
               <div className="mt-4 rounded-2xl bg-white p-4">
@@ -825,9 +912,12 @@ export default function SpacingOfPlantsQuiz({
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EAF7EE] text-[#2E9B59]">
             <Leaf size={29} />
           </div>
-          <h3 className="text-xl font-black text-[#244C32]">Great Job Completing the Quiz!</h3>
+          <h3 className="text-xl font-black text-[#244C32]">
+            Great Job Completing the Quiz!
+          </h3>
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
-            You have finished reviewing all your answers. Continue learning and apply what you have learned in your next lesson.
+            You have finished reviewing all your answers. Continue learning and
+            apply what you have learned in your next lesson.
           </p>
           <button
             type="button"
@@ -843,6 +933,7 @@ export default function SpacingOfPlantsQuiz({
 
   return (
     <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-3xl border border-[#DCEBDD] bg-white shadow-xl">
+      <FloatingBackButton />
       <style>{`
         @keyframes questionEnter {
           from { opacity: 0; transform: translateX(18px); }
@@ -866,7 +957,9 @@ export default function SpacingOfPlantsQuiz({
           </div>
           <div className="rounded-xl bg-white/15 px-3 py-2 text-center">
             <p className="text-[10px] font-bold text-white/70">QUESTION</p>
-            <p className="text-lg font-black">{currentIndex + 1}/{questions.length}</p>
+            <p className="text-lg font-black">
+              {currentIndex + 1}/{questions.length}
+            </p>
           </div>
         </div>
         <div className="mt-6">
@@ -926,10 +1019,17 @@ export default function SpacingOfPlantsQuiz({
                     >
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <span className={`flex-1 text-sm font-bold ${selected ? "text-green-800" : "text-gray-600"}`}>
+                    <span
+                      className={`flex-1 text-sm font-bold ${selected ? "text-green-800" : "text-gray-600"}`}
+                    >
                       {option}
                     </span>
-                    {selected && <CheckCircle2 size={20} className="shrink-0 text-[#2E9B59]" />}
+                    {selected && (
+                      <CheckCircle2
+                        size={20}
+                        className="shrink-0 text-[#2E9B59]"
+                      />
+                    )}
                   </button>
                 );
               })}
@@ -939,7 +1039,8 @@ export default function SpacingOfPlantsQuiz({
           {currentQuestion.type === "enumeration" && (
             <div className="mt-7">
               <div className="mb-3 flex items-center gap-2 text-xs font-bold text-purple-600">
-                <ClipboardCheck size={16} /> Separate each answer with a comma or a new line.
+                <ClipboardCheck size={16} /> Separate each answer with a comma
+                or a new line.
               </div>
               <textarea
                 value={answers[currentQuestion.id] || ""}
@@ -949,20 +1050,26 @@ export default function SpacingOfPlantsQuiz({
                 className="w-full resize-none rounded-2xl border-2 border-purple-100 bg-purple-50/40 p-4 text-sm font-semibold text-gray-700 outline-none transition focus:border-purple-400 focus:bg-white focus:ring-4 focus:ring-purple-100"
               />
               <p className="mt-2 text-xs text-gray-400">
-                Enter all the required items. The order of your answers does not matter.
+                Enter all the required items. The order of your answers does not
+                matter.
               </p>
             </div>
           )}
 
           {currentQuestion.type === "fill-blank" && (
             <div className="mt-7">
-              <label className="mb-3 block text-xs font-bold text-amber-700">Your Answer</label>
+              <label className="mb-3 block text-xs font-bold text-amber-700">
+                Your Answer
+              </label>
               <input
                 type="text"
                 value={answers[currentQuestion.id] || ""}
                 onChange={(event) => setAnswer(event.target.value)}
                 onKeyDown={(event) => {
-                  if (event.key === "Enter" && currentIndex < questions.length - 1) {
+                  if (
+                    event.key === "Enter" &&
+                    currentIndex < questions.length - 1
+                  ) {
                     setCurrentIndex((previous) => previous + 1);
                   }
                 }}
@@ -1020,11 +1127,12 @@ export default function SpacingOfPlantsQuiz({
           </div>
         )}
 
-        {answeredCount !== questions.length && currentIndex === questions.length - 1 && (
-          <p className="mt-3 text-right text-xs font-semibold text-amber-600">
-            Answer all questions to enable submission.
-          </p>
-        )}
+        {answeredCount !== questions.length &&
+          currentIndex === questions.length - 1 && (
+            <p className="mt-3 text-right text-xs font-semibold text-amber-600">
+              Answer all questions to enable submission.
+            </p>
+          )}
       </div>
     </div>
   );
