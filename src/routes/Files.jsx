@@ -595,7 +595,7 @@ function Files() {
       onDragLeave={isTeacher ? handleDragLeave : undefined}
       onDrop={isTeacher ? handleDrop : undefined}
     >
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-9 pb-10">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-9 pb-24">
         {/* HERO HEADER */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
