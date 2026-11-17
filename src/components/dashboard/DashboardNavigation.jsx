@@ -21,7 +21,7 @@ const navigationItems = [
   {
     label: "Quizzes",
     description: "Test your knowledge",
-    path: "/quizzes",
+    path: "/quizzess",
     icon: ClipboardCheck,
     color: "#D49A38",
     bg: "#FBF1DD",
