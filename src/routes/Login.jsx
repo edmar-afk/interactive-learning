@@ -18,6 +18,7 @@ import {
   Flower2,
 } from "lucide-react";
 import api from "../assets/api";
+import InteractiveGuide from "../components/InteractiveGuide";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
@@ -148,6 +149,26 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-[#EAF7EE] flex justify-center items-center p-0 sm:p-6">
+      <InteractiveGuide
+        messages={[
+          "Welcome back, learner! 🌱 I'm your friendly tree buddy. I'll help you get signed in so you can continue your Scan-Grow learning journey!",
+
+          "This is the Login page. You need an account to access your learning materials and interactive activities. Don't worry, I'll guide you through it!",
+
+          "First, enter your Username in the first field. Make sure you type the correct username associated with your account.",
+
+          "Next, enter your Password in the second field. Remember to keep your password private and never share it with anyone!",
+
+          "Can't see what you're typing? 👀 You can click the eye icon on the right side of the password field to show or hide your password.",
+
+          "Once you've entered your username and password, click the green SIGN IN button to access your account. Make sure both fields are filled in correctly!",
+
+          "Having trouble signing in? Check your username and password. If there's a connection problem or something goes wrong with the server, you may see an error message. Try again when everything is ready.",
+
+          "That's it! You're ready to grow your knowledge! 🌳 Sign in to explore, learn about planting, and discover how to care for healthy, fruit-bearing trees. Happy learning!",
+        ]}
+      />
+
       {/* Mobile App Container */}
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}
@@ -647,41 +668,6 @@ export default function Login() {
 
               <div className="h-px bg-gray-200 flex-1" />
             </div>
-
-            {/* ================================================= */}
-            {/* CREATE ACCOUNT */}
-            {/* ================================================= */}
-
-            <motion.div
-              whileHover={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      scale: 1.025,
-                      y: -3,
-                    }
-              }
-              whileTap={{ scale: 0.96 }}
-              transition={spring}
-            >
-              <Link
-                to="/register"
-                className="group relative overflow-hidden w-full h-14 rounded-2xl border-2 border-[#DDEBE1] text-[#285238] font-bold text-sm flex items-center justify-center gap-3 hover:border-[#2E9B59] hover:bg-[#F4FAF6] transition-colors"
-              >
-                <motion.div
-                  whileHover={{ rotate: 15, scale: 1.15 }}
-                  className="relative z-10"
-                >
-                  <UserPlus size={19} />
-                </motion.div>
-
-                <span className="relative z-10">Create New Account</span>
-
-                <motion.div whileHover={{ x: 4 }} className="relative z-10">
-                  <ArrowRight size={17} />
-                </motion.div>
-              </Link>
-            </motion.div>
 
             {/* ================================================= */}
             {/* FOOTER */}

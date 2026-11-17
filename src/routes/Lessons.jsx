@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import BottomNav from "../components/BottomNav";
 import video1 from "../assets/videos/video1.mp4";
+import InteractiveGuide from "../components/InteractiveGuide";
 const plantingSkills = [
   {
     number: "01",
@@ -194,8 +195,16 @@ function LessonCard({ lesson }) {
 }
 
 function Lessons() {
+  const guideMessages = [
+    "Hello, learner! 🌱 Welcome to Planting Lessons! This section will teach you the important steps in properly planting fruit-bearing trees. Let's explore each lesson together!",
+    "Before starting your practical lessons, watch the Introduction to Planting video! 🎥 It explains the basics of proper planting and helps you understand what you will learn in the activities below.",
+    "Ready to develop your planting skills? 🌳 There are five lessons to explore: Soil Preparation, Handling of Seedlings, Seedling Depth, Spacing of Plants, and Watering Technique. Each lesson takes approximately 8 minutes. Click START LESSON to open a topic and learn the correct techniques.",
+    "Remember, good planting starts with good practice! 💚 Follow each step carefully, from preparing the soil to watering your seedlings. Take your time, practice what you learn, and keep growing with Scan-Grow!",
+  ];
+
   return (
     <div className="min-h-screen bg-[#EAF7EE]">
+      <InteractiveGuide messages={guideMessages} />
       <div className="max-w-[900px] mx-auto min-h-screen pb-24">
         {/* Header */}
         <header className="px-5 pt-7 pb-5">

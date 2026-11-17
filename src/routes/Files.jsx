@@ -47,6 +47,7 @@ import {
 
 import BottomNav from "../components/BottomNav";
 import api from "../assets/api";
+import InteractiveGuide from "../components/InteractiveGuide";
 
 const categories = [
   { id: "all", label: "All Files", icon: FolderOpen },
@@ -195,6 +196,18 @@ function Files() {
 
   const isTeacher =
     userInfo?.is_superuser === true || userInfo?.is_superuser === "true";
+
+  const guideMessages = [
+    "Hello! 🌱 Welcome to the Lesson Files section! This is where you can explore and access learning materials, references, and resources uploaded to Scan-Grow.",
+
+    "Looking for something specific? 🔍 Use the search bar to find materials by title or filename. You can also filter resources by category, such as PDF, Documents, Images, Spreadsheets, and Others. Try switching between Grid and List views to organize how files appear!",
+
+    "Found a learning material? 📚 Click VIEW to open supported files directly on the page, or DOWNLOAD to save them to your device. You can also refresh the library to check for newly uploaded materials.",
+
+    isTeacher
+      ? "Hello, Teacher! 👩‍🏫 You have additional library controls. Click ADD LESSON FILE to upload a learning resource by providing its title and selecting a file. You can also delete existing materials using the trash button. Help your students learn and grow! 🌳"
+      : "As a Student, you can explore, preview, and download the learning materials available in your library. Browse the resources, find useful references, and keep learning at your own pace! 🎓",
+  ];
 
   // DATA
   const [files, setFiles] = useState([]);
@@ -595,6 +608,7 @@ function Files() {
       onDragLeave={isTeacher ? handleDragLeave : undefined}
       onDrop={isTeacher ? handleDrop : undefined}
     >
+      <InteractiveGuide messages={guideMessages} />
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-9 pb-24">
         {/* HERO HEADER */}
         <motion.div

@@ -11,6 +11,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import InteractiveGuide from "../components/InteractiveGuide";
 
 function Welcome() {
   const shouldReduceMotion = useReducedMotion();
@@ -74,6 +75,25 @@ function Welcome() {
 
   return (
     <div className="min-h-screen bg-[#EAF7EE] flex justify-center">
+      <InteractiveGuide
+        messages={[
+          "Hello there! 🌱 Welcome to our Interactive Learning Application! I'm your little tree buddy, and I'll guide you around!",
+
+          "Are you ready to explore the wonderful world of plants? Here, you'll discover how to grow healthy and fruit-bearing trees step by step!",
+
+          "Our learning journey has three important parts: Learn, Plant, and Grow! Let's explore what each one means.",
+
+          "First, LEARN! 🌿 Discover useful knowledge about plants, proper planting techniques, and how to take care of your trees.",
+
+          "Next, PLANT! 🌱 Put your knowledge into action and learn the proper steps to plant and nurture your very own trees.",
+
+          "Finally, GROW! 🌳 Understand how to care for your plants as they develop into healthy, fruit-bearing trees!",
+
+          "Ready to begin? Click the Login button below to access your learning experience and start exploring!",
+
+          "That's all for now! Remember, every great tree starts with a tiny seed. Let's grow something amazing together! 💚",
+        ]}
+      />
       {/* Mobile App Container */}
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}

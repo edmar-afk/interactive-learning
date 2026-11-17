@@ -25,6 +25,7 @@ import {
   Shield,
 } from "lucide-react";
 import BottomNav from "../components/BottomNav";
+import InteractiveGuide from "../components/InteractiveGuide";
 
 // ============================================================
 // LOCAL STORAGE
@@ -101,7 +102,37 @@ export default function Profile() {
   const role = user?.is_superuser === true ? "Teacher" : "Student";
 
   const isTeacher = role === "Teacher";
+  // ============================================================
+  // PERSONALIZED INTERACTIVE GUIDE
+  // ============================================================
 
+  const guideName = user?.first_name?.trim() || user?.username || "Learner";
+
+  const guideMessages = [
+    `Hello, ${guideName}! 🌱 Welcome to your Scan-Grow profile! I'm your friendly tree buddy. I'll help you understand your account and show you around!`,
+
+    `Nice to see you here, ${guideName}! Your profile displays your registered account information, including your name, username, account role, and account status.`,
+
+    `Let's start with your profile section! 🌿 The initials inside your profile picture represent your name. You'll also see your registered username, @${username}, and your account role.`,
+
+    isTeacher
+      ? `Hello, Teacher ${guideName}! 👩‍🏫 Your account is registered with the Teacher role. You help guide learners and support their agricultural learning journey.`
+      : `Hello, ${guideName}! 🎓 Your account is registered with the Student role. You can explore learning materials, discover planting techniques, and improve your knowledge about fruit-bearing trees.`,
+
+    `Next is your Account Overview! Here you can check your username, account role, and account status. Try tapping any of the information cards to reveal additional details.`,
+
+    `Your Account Status tells you whether your account is currently active. An active account means your account is enabled, while an inactive account may have restrictions when accessing the application.`,
+
+    `Under Personal Details, you can view the personal information associated with your account, such as your registered first name. Some information may display as Not provided if it isn't available in your account.`,
+
+    `You can also explore the Account Information section! Tap it to expand additional account properties, including your User ID, Superuser status, Staff Account status, and Active Account status.`,
+
+    isTeacher
+      ? `As a Teacher, your role is important! 🌳 Continue supporting learners, sharing knowledge, and helping them understand the wonderful world of planting and growing trees.`
+      : `As a Student, every lesson is an opportunity to grow! 🌱 Keep exploring learning materials, practicing what you learn, and discovering how to grow healthy, fruit-bearing trees.`,
+
+    `That's your profile tour, ${guideName}! Remember, learning is just like growing a tree. It takes patience, knowledge, and care. Keep growing with Scan-Grow! 💚`,
+  ];
   const initials = getInitials(
     user?.first_name,
     user?.last_name,
@@ -250,6 +281,7 @@ export default function Profile() {
   return (
     <>
       <div className="min-h-screen bg-[#F2F8F3] pb-32 overflow-hidden">
+        <InteractiveGuide messages={guideMessages} />
         {/* ================================================== */}
         {/* HERO SECTION */}
         {/* ================================================== */}
