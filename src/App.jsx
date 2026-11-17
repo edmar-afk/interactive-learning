@@ -21,6 +21,7 @@ import SpacingOfPlantsQuiz from "./components/quizzes/SpacingOfPlantsQuiz";
 import WateringTechniqueQuiz from "./components/quizzes/WateringTechniquesQuiz";
 import Files from "./routes/Files";
 import Students from "./routes/Students";
+import Quizes from "./routes/Quizes";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -41,6 +42,7 @@ function App() {
         <Route path="/students" element={<Students/>} />
 
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/quizzes" element={<Quizes />} />
         <Route path="/multiple-choice" element={<MultipleChoice />} />
         <Route path="/fill-in-the-blanks" element={<FillInTheBlanks />} />
         <Route path="/true-or-false" element={<TrueOrFalse/>} />

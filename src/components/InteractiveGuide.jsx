@@ -16,7 +16,41 @@ function InteractiveGuide({
 
   const currentMessage = messages[currentIndex] || "";
 
-  // Typing animation
+  // TEXT TO SPEECH
+  const speakMessage = (text) => {
+    if (!("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+
+    // Cute chibi voice settings
+    speech.rate = 1.5;
+    speech.pitch = 6.0;
+    speech.volume = 10;
+
+    // Select a feminine-sounding English voice
+    const voices = window.speechSynthesis.getVoices();
+
+    const preferredVoice =
+      voices.find((voice) =>
+        /samantha|aria|jenny|zira|karen|moira|tessa/i.test(voice.name),
+      ) ||
+      voices.find(
+        (voice) =>
+          /female/i.test(voice.name) &&
+          voice.lang.toLowerCase().startsWith("en"),
+      ) ||
+      voices.find((voice) => voice.lang.toLowerCase().startsWith("en"));
+
+    if (preferredVoice) {
+      speech.voice = preferredVoice;
+    }
+
+    window.speechSynthesis.speak(speech);
+  };
+
+  // TYPING ANIMATION
   useEffect(() => {
     if (!visible) return;
 
@@ -39,7 +73,34 @@ function InteractiveGuide({
     return () => clearInterval(interval);
   }, [visible, currentIndex, currentMessage]);
 
-  // Open guide
+  // SPEAK CURRENT MESSAGE
+  useEffect(() => {
+    if (!visible || !currentMessage) return;
+
+    let cancelled = false;
+
+    const speak = () => {
+      if (!cancelled) {
+        speakMessage(currentMessage);
+      }
+    };
+
+    // Wait for browser voices to load
+    if (window.speechSynthesis.getVoices().length > 0) {
+      speak();
+    } else {
+      window.speechSynthesis.onvoiceschanged = speak;
+      speak();
+    }
+
+    return () => {
+      cancelled = true;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, [visible, currentIndex, currentMessage]);
+
+  // OPEN GUIDE
   const openGuide = () => {
     setCurrentIndex(0);
     setDisplayedText("");
@@ -47,13 +108,14 @@ function InteractiveGuide({
     setVisible(true);
   };
 
-  // Close guide
+  // CLOSE GUIDE
   const closeGuide = () => {
+    window.speechSynthesis?.cancel();
     setVisible(false);
     onClose?.();
   };
 
-  // Next message
+  // NEXT MESSAGE
   const nextMessage = () => {
     if (currentIndex < messages.length - 1) {
       setCurrentIndex((prev) => prev + 1);
@@ -132,7 +194,7 @@ function InteractiveGuide({
                 relative mb-4 min-w-0 flex-1
                 max-h-[75vh] overflow-y-auto
                 rounded-2xl p-4 sm:p-5
-            
+
               "
             >
               {/* CLOSE BUTTON */}
