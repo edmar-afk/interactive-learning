@@ -154,7 +154,7 @@ function Dashboard() {
                   }}
                   className="mt-8"
                 >
-                  <StudentsScores />
+                 
                 </motion.section>
               ) : (
                 <motion.section

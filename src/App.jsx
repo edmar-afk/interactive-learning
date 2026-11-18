@@ -23,6 +23,7 @@ import Files from "./routes/Files";
 import Students from "./routes/Students";
 import Quizes from "./routes/Quizes";
 import Videos from "./routes/Videos";
+import StudenQuiz from "./routes/StudentQuiz";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -44,6 +45,8 @@ function App() {
         <Route path="/videos" element={<Videos/>} />
 
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/student-scores" element={<StudenQuiz/>} />
+
         <Route path="/quizzes" element={<Quizes />} />
         <Route path="/multiple-choice" element={<MultipleChoice />} />
         <Route path="/fill-in-the-blanks" element={<FillInTheBlanks />} />
