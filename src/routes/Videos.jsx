@@ -362,11 +362,11 @@ function Videos() {
 
     result.sort((a, b) => {
       if (sortBy === "newest") {
-        return new Date(b.date_added || 0) - new Date(a.date_added || 0);
+        return new Date(b.uploaded_at || 0) - new Date(a.uploaded_at || 0);
       }
 
       if (sortBy === "oldest") {
-        return new Date(a.date_added || 0) - new Date(b.date_added || 0);
+        return new Date(a.uploaded_at || 0) - new Date(b.uploaded_at || 0);
       }
 
       if (sortBy === "az") {
@@ -391,7 +391,7 @@ function Videos() {
     if (!videos.length) return null;
 
     return [...videos].sort(
-      (a, b) => new Date(b.date_added || 0) - new Date(a.date_added || 0),
+      (a, b) => new Date(b.uploaded_at || 0) - new Date(a.uploaded_at || 0),
     )[0];
   }, [videos]);
 
@@ -853,7 +853,7 @@ function Videos() {
             {
               label: "Latest Upload",
               value: latestVideo
-                ? new Date(latestVideo.date_added).toLocaleDateString(
+                ? new Date(latestVideo.uploaded_at).toLocaleDateString(
                     "en-PH",
                     {
                       month: "short",
@@ -1249,9 +1249,9 @@ function Videos() {
                               size={12}
                               className="text-[#2E9B59]"
                             />
-                            {video.date_added
+                            {video.uploaded_at
                               ? new Date(
-                                  video.date_added,
+                                  video.uploaded_at,
                                 ).toLocaleDateString("en-PH", {
                                   month: "short",
                                   day: "numeric",
@@ -1653,7 +1653,7 @@ function Videos() {
                     <p className="text-[11px] text-[#91A097]">
                       {getExtension(previewFile).replace(".", "").toUpperCase()}
                       {" • "}
-                      {formatDate(previewFile.date_added)}
+                      {formatDate(previewFile.uploaded_at)}
                     </p>
                   </div>
                 </div>
