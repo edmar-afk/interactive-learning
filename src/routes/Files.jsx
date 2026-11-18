@@ -198,14 +198,14 @@ function Files() {
     userInfo?.is_superuser === true || userInfo?.is_superuser === "true";
 
   const guideMessages = [
-    "Hello! 🌱 Welcome to the Lesson Files section! This is where you can explore and access learning materials, references, and resources uploaded to Scan-Grow.",
+    "Hello! 🌱 Welcome to the Presentations section! This is where you can explore and access learning materials, references, and resources uploaded to Scan-Grow.",
 
     "Looking for something specific? 🔍 Use the search bar to find materials by title or filename. You can also filter resources by category, such as PDF, Documents, Images, Spreadsheets, and Others. Try switching between Grid and List views to organize how files appear!",
 
     "Found a learning material? 📚 Click VIEW to open supported files directly on the page, or DOWNLOAD to save them to your device. You can also refresh the library to check for newly uploaded materials.",
 
     isTeacher
-      ? "Hello, Teacher! 👩‍🏫 You have additional library controls. Click ADD LESSON FILE to upload a learning resource by providing its title and selecting a file. You can also delete existing materials using the trash button. Help your students learn and grow! 🌳"
+      ? "Hello, Teacher! 👩‍🏫 You have additional library controls. Click ADD Presentation to upload a learning resource by providing its title and selecting a file. You can also delete existing materials using the trash button. Help your students learn and grow! 🌳"
       : "As a Student, you can explore, preview, and download the learning materials available in your library. Browse the resources, find useful references, and keep learning at your own pace! 🎓",
   ];
 
@@ -281,7 +281,7 @@ function Files() {
         setFiles(Array.isArray(data) ? data : data.results || []);
       } catch (error) {
         console.error("Failed to fetch files:", error);
-        notify("Unable to load lesson files.", "error");
+        notify("Unable to load Presentations.", "error");
       } finally {
         setLoading(false);
         setRefreshing(false);
@@ -445,7 +445,7 @@ function Files() {
       resetUpload();
       setShowUpload(false);
 
-      notify("Lesson file uploaded successfully!");
+      notify("Presentation uploaded successfully!");
 
       await fetchFiles(true);
     } catch (error) {
@@ -544,7 +544,7 @@ function Files() {
         setPreviewFile(null);
       }
 
-      notify("Lesson file deleted successfully.");
+      notify("Presentation deleted successfully.");
     } catch (error) {
       console.error("Delete error:", error);
       notify("Unable to delete this file.", "error");
@@ -652,7 +652,7 @@ function Files() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Lesson Files
+                Presentations
                 <motion.span
                   animate={{ rotate: [0, 15, -10, 0] }}
                   transition={{
@@ -692,7 +692,7 @@ function Files() {
                 className="shrink-0 flex items-center justify-center gap-2 bg-white text-[#25864C] px-6 py-4 rounded-2xl font-extrabold text-sm shadow-lg hover:shadow-xl transition"
               >
                 <Plus size={20} />
-                Add Lesson File
+                Add Presentation
               </motion.button>
             )}
           </div>
@@ -983,7 +983,7 @@ function Files() {
             <h3 className="text-xl font-extrabold text-[#344B3A]">
               {search || activeCategory !== "all"
                 ? "No matching resources"
-                : "No lesson files yet"}
+                : "No Presentations yet"}
             </h3>
 
             <p className="text-sm text-[#91A097] max-w-sm mx-auto mt-2">
@@ -1261,7 +1261,7 @@ function Files() {
                   <CloudUpload size={26} />
                 </div>
 
-                <h2 className="text-xl font-black">Upload Lesson File</h2>
+                <h2 className="text-xl font-black">Upload Presentation</h2>
 
                 <p className="text-white/75 text-sm mt-1">
                   Add a learning resource to the student library.
@@ -1550,7 +1550,7 @@ function Files() {
               </div>
 
               <h3 className="text-lg font-extrabold text-[#344B3A]">
-                Delete Lesson File?
+                Delete Presentation?
               </h3>
 
               <p className="text-sm text-[#91A097] mt-2">

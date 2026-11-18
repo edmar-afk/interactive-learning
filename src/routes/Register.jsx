@@ -19,6 +19,7 @@ import {
   Flower2,
   ShieldCheck,
 } from "lucide-react";
+import BottomNav from "../components/BottomNav";
 
 export default function Register() {
   const shouldReduceMotion = useReducedMotion();
@@ -785,6 +786,8 @@ export default function Register() {
           </motion.div>
         </div>
       </div>
+
+      <BottomNav/>
     </div>
   );
 }

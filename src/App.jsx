@@ -22,6 +22,7 @@ import WateringTechniqueQuiz from "./components/quizzes/WateringTechniquesQuiz";
 import Files from "./routes/Files";
 import Students from "./routes/Students";
 import Quizes from "./routes/Quizes";
+import Videos from "./routes/Videos";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/" />;
@@ -40,6 +41,7 @@ function App() {
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/students" element={<Students/>} />
+        <Route path="/videos" element={<Videos/>} />
 
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/quizzes" element={<Quizes />} />

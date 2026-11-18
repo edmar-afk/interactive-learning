@@ -1,13 +1,25 @@
-
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import {
   BookOpen,
   ClipboardCheck,
-  FolderOpen,
+  Presentation,
+  Video,
+  UserPlus,
+  Users,
   ArrowUpRight,
 } from "lucide-react";
+
+const getUserInfo = () => {
+  try {
+    const storedUser = localStorage.getItem("userInfo");
+    return storedUser ? JSON.parse(storedUser) : null;
+  } catch (error) {
+    console.error("Unable to retrieve user information:", error);
+    return null;
+  }
+};
 
 const navigationItems = [
   {
@@ -27,19 +39,52 @@ const navigationItems = [
     bg: "#FBF1DD",
   },
   {
-    label: "My Files",
-    description: "View your saved files",
+    label: "Presentations",
+    description: "View presentations",
     path: "/files",
-    icon: FolderOpen,
+    icon: Presentation,
     color: "#5796C9",
     bg: "#E8F2FA",
   },
+  {
+    label: "Videos",
+    description: "Watch learning videos",
+    path: "/videos",
+    icon: Video,
+    color: "#9B78C9",
+    bg: "#F1EAF9",
+  },
+  {
+    label: "Register Students",
+    description: "Register new student accounts",
+    path: "/register",
+    icon: UserPlus,
+    color: "#E17B58",
+    bg: "#FCEDE7",
+    teacherOnly: true,
+  },
+  {
+    label: "Student Scores",
+    description: "View Students' progress",
+    path: "/student-scores",
+    icon: Users,
+    color: "#E17B58",
+    bg: "#FCEDE7",
+    teacherOnly: true,
+  },
 ];
 
-function DashboardNavigation({ isTeacher = false }) {
+function DashboardNavigation() {
   const shouldReduceMotion = useReducedMotion();
 
-  if (isTeacher) return null;
+  const user = getUserInfo();
+
+  // Follow the same role detection used in Profile
+  const isTeacher = user?.is_superuser === true;
+
+  const visibleItems = navigationItems.filter(
+    (item) => !item.teacherOnly || isTeacher,
+  );
 
   return (
     <section className="px-5 mt-7">
@@ -63,12 +108,12 @@ function DashboardNavigation({ isTeacher = false }) {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          {navigationItems.map((item, index) => {
+          {visibleItems.map((item, index) => {
             const Icon = item.icon;
 
             return (
               <motion.div
-                key={item.path}
+                key={item.label}
                 initial={
                   shouldReduceMotion
                     ? false
@@ -82,15 +127,9 @@ function DashboardNavigation({ isTeacher = false }) {
                   stiffness: 130,
                 }}
                 whileHover={
-                  shouldReduceMotion
-                    ? undefined
-                    : { y: -5, scale: 1.03 }
+                  shouldReduceMotion ? undefined : { y: -5, scale: 1.03 }
                 }
-                whileTap={
-                  shouldReduceMotion
-                    ? undefined
-                    : { scale: 0.95 }
-                }
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}
               >
                 <NavLink
                   to={item.path}
@@ -123,9 +162,7 @@ function DashboardNavigation({ isTeacher = false }) {
                         <ArrowUpRight
                           size={15}
                           className={
-                            isActive
-                              ? "text-[#3BA961]"
-                              : "text-[#B6C1B9]"
+                            isActive ? "text-[#3BA961]" : "text-[#B6C1B9]"
                           }
                         />
                       </div>

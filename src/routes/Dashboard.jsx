@@ -124,7 +124,7 @@ function Dashboard() {
           <WelcomeHeader />
 
           {/* Student Navigation Buttons */}
-          {!isSuperuser && <DashboardNavigation />}
+          <DashboardNavigation/>
 
           {/* Main Dashboard Content */}
           <div className="relative z-10 -mt-5">
