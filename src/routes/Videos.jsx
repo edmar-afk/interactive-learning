@@ -542,30 +542,43 @@ function Videos() {
   // API: GET /api/videos/:id/view/
   // ====================================================
 
+  // ======================================================
+  // VIEW VIDEO
+  // Uses the file URL returned by GET /api/videos/
+  // ======================================================
+
   const handleView = async (video) => {
+    console.log("========== VIDEO VIEW DEBUG ==========");
+    console.log("Selected video:", video);
+    console.log("Video ID:", video?.id);
+    console.log("File:", video?.file);
+    console.log("File URL:", video?.file_url);
+
     try {
       setPreviewLoading(video.id);
 
       const response = await api.get(`/api/videos/${video.id}/view/`);
 
-      const fileUrl = response.data.file_url;
+      console.log("VIDEO VIEW API RESPONSE:", response.data);
+      console.log("RETURNED FILE URL:", response.data?.file_url);
 
-      if (!fileUrl) {
-        notify("Video preview is unavailable.", "error");
+      if (!response.data?.file_url) {
+        console.error("ERROR: API returned no file_url!");
+        notify("Video file URL is unavailable.", "error");
         return;
       }
 
       setPreviewFile({
         ...video,
-        previewUrl: fileUrl,
+        previewUrl: response.data.file_url,
       });
     } catch (error) {
-      console.error("Video preview error:", error);
+      console.error("VIDEO VIEW ERROR:", error);
+      console.error("ERROR RESPONSE:", error.response?.data);
+      console.error("ERROR STATUS:", error.response?.status);
+      console.error("REQUEST URL:", error.config?.url);
 
-      notify(
-        error.response?.data?.detail || "Unable to open this video.",
-        "error",
-      );
+      notify("Unable to open this video.", "error");
     } finally {
       setPreviewLoading(null);
     }
